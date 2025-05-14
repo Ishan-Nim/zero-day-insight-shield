@@ -1,329 +1,260 @@
+import { faker } from '@faker-js/faker';
 
-import { ScanTarget, ScanResult, Vulnerability, SubscriptionPlan, Report } from '@/types';
+export interface ScanTarget {
+  id: string;
+  name: string;
+  url: string;
+  description?: string;
+  customerId: string;
+  verified: boolean;
+  status: 'active' | 'inactive' | 'scanning';
+  lastScan?: Date;
+}
+
+export interface Customer {
+  id: string;
+  name: string;
+  email: string;
+  industry: string;
+  numTargets: number;
+  riskLevel: 'high' | 'medium' | 'low';
+}
+
+// Update the Report type to include the 'name' property if it's being used
+export interface Report {
+  id: string;
+  targetId: string;
+  targetName: string;
+  customerId: string;
+  scanDate: Date;
+  vulnerabilities: {
+    critical: number;
+    high: number;
+    medium: number;
+    low: number;
+  };
+  vulnerabilityTypes: string[];
+  status: 'sent' | 'pending' | 'failed';
+}
+
+export interface Vulnerability {
+  id: string;
+  targetId: string;
+  reportId: string;
+  name: string;
+  severity: 'critical' | 'high' | 'medium' | 'low';
+  type: string;
+  description: string;
+  location: string;
+  dateFound: Date;
+  status: 'open' | 'closed' | 'pending review';
+}
 
 export const mockTargets: ScanTarget[] = [
   {
     id: '1',
+    name: 'Corporate Website',
     url: 'https://example.com',
-    name: 'Example Website',
     description: 'Main corporate website',
-    lastScan: new Date('2023-05-10T14:30:00'),
-    nextScan: new Date('2023-05-17T14:30:00'),
-    status: 'active',
+    customerId: '2',
     verified: true,
-    owner: '2',
-    createdAt: new Date('2023-01-15'),
-    scanDepth: 'normal',
-    excludedPaths: ['/admin', '/private']
+    status: 'active',
+    lastScan: new Date(2023, 1, 1)
   },
   {
     id: '2',
-    url: 'https://blog.example.com',
-    name: 'Example Blog',
-    description: 'Company blog running on WordPress',
-    lastScan: new Date('2023-05-05T10:15:00'),
+    name: 'Customer Portal',
+    url: 'https://customer.example.com',
+    description: 'Website for customers to manage their accounts',
+    customerId: '2',
+    verified: false,
     status: 'active',
-    verified: true,
-    owner: '2',
-    createdAt: new Date('2023-02-20')
+    lastScan: new Date(2023, 2, 15)
   },
   {
     id: '3',
-    url: 'https://store.example.com',
-    name: 'Example Store',
-    description: 'E-commerce website',
-    lastScan: new Date('2023-05-12T08:45:00'),
-    status: 'scanning',
+    name: 'API Gateway',
+    url: 'https://api.example.com',
+    description: 'API gateway for mobile app',
+    customerId: '2',
     verified: true,
-    owner: '2',
-    createdAt: new Date('2023-03-05')
+    status: 'scanning',
+    lastScan: new Date(2023, 3, 1)
   },
   {
     id: '4',
-    url: 'https://dev.example.com',
-    name: 'Development Server',
-    description: 'Staging environment',
-    status: 'inactive',
+    name: 'Marketing Website',
+    url: 'https://marketing.example.com',
+    description: 'Marketing website for the company',
+    customerId: '2',
     verified: false,
-    owner: '2',
-    createdAt: new Date('2023-04-10')
+    status: 'inactive',
+    lastScan: new Date(2022, 12, 1)
   },
+  {
+    id: '5',
+    name: 'Internal Dashboard',
+    url: 'https://dashboard.example.com',
+    description: 'Internal dashboard for employees',
+    customerId: '2',
+    verified: true,
+    status: 'active',
+    lastScan: new Date(2023, 4, 1)
+  }
+];
+
+export const mockCustomers: Customer[] = [
+  {
+    id: '1',
+    name: 'Acme Corp',
+    email: 'info@acmecorp.com',
+    industry: 'Technology',
+    numTargets: 5,
+    riskLevel: 'high'
+  },
+  {
+    id: '2',
+    name: 'Beta Co',
+    email: 'contact@betaco.com',
+    industry: 'Finance',
+    numTargets: 3,
+    riskLevel: 'medium'
+  },
+  {
+    id: '3',
+    name: 'Gamma Inc',
+    email: 'sales@gammainc.com',
+    industry: 'Healthcare',
+    numTargets: 8,
+    riskLevel: 'low'
+  }
+];
+
+// Update the mockReports to match the Report interface
+export const mockReports: Report[] = [
+  {
+    id: '1',
+    targetId: '1',
+    targetName: 'Corporate Website',
+    customerId: '2',
+    scanDate: new Date(2023, 3, 15),
+    vulnerabilities: {
+      critical: 1,
+      high: 3,
+      medium: 7,
+      low: 12
+    },
+    vulnerabilityTypes: ['XSS', 'SQL Injection', 'CSRF'],
+    status: 'sent'
+  },
+  {
+    id: '2',
+    targetId: '2',
+    targetName: 'Customer Portal',
+    customerId: '2',
+    scanDate: new Date(2023, 4, 2),
+    vulnerabilities: {
+      critical: 0,
+      high: 2,
+      medium: 5,
+      low: 8
+    },
+    vulnerabilityTypes: ['XSS', 'Broken Authentication'],
+    status: 'sent'
+  },
+  {
+    id: '3',
+    targetId: '3',
+    targetName: 'API Gateway',
+    customerId: '2',
+    scanDate: new Date(2023, 4, 10),
+    vulnerabilities: {
+      critical: 2,
+      high: 4,
+      medium: 3,
+      low: 6
+    },
+    vulnerabilityTypes: ['API Security', 'Rate Limiting Bypass', 'Injection'],
+    status: 'pending'
+  }
 ];
 
 export const mockVulnerabilities: Vulnerability[] = [
   {
-    id: 'v1',
-    name: 'SQL Injection',
-    description: 'SQL Injection vulnerability in login form',
-    severity: 'high',
-    url: 'https://example.com/login',
-    date: new Date('2023-05-10T14:35:00'),
-    status: 'open',
-    category: 'Injection',
-    cwe: 'CWE-89',
-    remediation: 'Use prepared statements and parameterized queries'
-  },
-  {
-    id: 'v2',
+    id: '1',
+    targetId: '1',
+    reportId: '1',
     name: 'Cross-Site Scripting (XSS)',
-    description: 'Stored XSS in comment section',
     severity: 'high',
-    url: 'https://blog.example.com/post/1#comments',
-    date: new Date('2023-05-05T10:20:00'),
-    status: 'open',
-    category: 'XSS',
-    cwe: 'CWE-79',
-    remediation: 'Implement proper output encoding and use Content-Security-Policy'
+    type: 'XSS',
+    description: 'A cross-site scripting vulnerability was found in the search functionality.',
+    location: '/search?q=<script>alert("XSS")</script>',
+    dateFound: new Date(2023, 3, 15),
+    status: 'open'
   },
   {
-    id: 'v3',
-    name: 'Missing CSRF Token',
-    description: 'CSRF protection missing on form submission',
-    severity: 'medium',
-    url: 'https://example.com/profile/update',
-    date: new Date('2023-05-10T14:40:00'),
-    status: 'open',
-    category: 'CSRF',
-    cwe: 'CWE-352',
-    remediation: 'Implement anti-CSRF tokens in all forms'
-  },
-  {
-    id: 'v4',
-    name: 'Sensitive Information in robots.txt',
-    description: 'robots.txt contains paths to sensitive directories',
-    severity: 'low',
-    url: 'https://example.com/robots.txt',
-    date: new Date('2023-05-10T14:45:00'),
-    status: 'fixed',
-    category: 'Information Disclosure',
-    cwe: 'CWE-200',
-    remediation: 'Remove sensitive paths from robots.txt'
-  },
-  {
-    id: 'v5',
-    name: 'Outdated jQuery Version',
-    description: 'Using jQuery v1.8.3 with known vulnerabilities',
-    severity: 'medium',
-    url: 'https://example.com',
-    date: new Date('2023-05-10T14:50:00'),
-    status: 'open',
-    category: 'Outdated Software',
-    cwe: 'CWE-1104',
-    remediation: 'Update to the latest jQuery version'
-  },
-  {
-    id: 'v6',
-    name: 'Insecure SSL/TLS Configuration',
-    description: 'TLS 1.0/1.1 and weak cipher suites enabled',
-    severity: 'medium',
-    url: 'https://example.com',
-    date: new Date('2023-05-10T14:55:00'),
-    status: 'open',
-    category: 'Insecure Configuration',
-    cwe: 'CWE-327',
-    remediation: 'Disable TLS 1.0/1.1 and weak cipher suites'
-  },
-  {
-    id: 'v7',
-    name: 'Directory Listing Enabled',
-    description: 'Directory listing enabled exposing file structure',
-    severity: 'low',
-    url: 'https://example.com/images/',
-    date: new Date('2023-05-10T15:00:00'),
-    status: 'open',
-    category: 'Information Disclosure',
-    cwe: 'CWE-548',
-    remediation: 'Disable directory listing in web server configuration'
-  },
-  {
-    id: 'v8',
-    name: 'Open Redirect',
-    description: 'Unvalidated redirect parameter in login functionality',
-    severity: 'low',
-    url: 'https://example.com/login?redirect=',
-    date: new Date('2023-05-10T15:05:00'),
-    status: 'ignored',
-    category: 'Unvalidated Redirects',
-    cwe: 'CWE-601',
-    remediation: 'Implement a whitelist of allowed redirect URLs'
-  },
-  {
-    id: 'v9',
-    name: 'Session ID in URL',
-    description: 'Session identifiers included in URL parameters',
-    severity: 'medium',
-    url: 'https://example.com/home?session=abc123',
-    date: new Date('2023-05-10T15:10:00'),
-    status: 'open',
-    category: 'Session Management',
-    cwe: 'CWE-598',
-    remediation: 'Use cookies with secure and HttpOnly flags for session management'
-  },
-  {
-    id: 'v10',
-    name: 'Missing Security Headers',
-    description: 'Security headers like CSP, X-XSS-Protection missing',
-    severity: 'info',
-    url: 'https://example.com',
-    date: new Date('2023-05-10T15:15:00'),
-    status: 'open',
-    category: 'Security Headers',
-    cwe: 'CWE-693',
-    remediation: 'Implement proper security headers in HTTP responses'
-  }
-];
-
-export const mockScanResults: ScanResult[] = [
-  {
-    id: 'scan1',
+    id: '2',
     targetId: '1',
-    startTime: new Date('2023-05-10T14:30:00'),
-    endTime: new Date('2023-05-10T15:20:00'),
-    status: 'completed',
-    vulnerabilities: [
-      mockVulnerabilities[0],
-      mockVulnerabilities[2],
-      mockVulnerabilities[3],
-      mockVulnerabilities[5],
-      mockVulnerabilities[9]
-    ],
-    summary: {
-      totalUrls: 120,
-      scannedUrls: 118,
-      highSeverity: 1,
-      mediumSeverity: 2,
-      lowSeverity: 1,
-      infoSeverity: 1
-    }
+    reportId: '1',
+    name: 'SQL Injection',
+    severity: 'critical',
+    type: 'SQL Injection',
+    description: 'A SQL injection vulnerability was found in the login form.',
+    location: '/login',
+    dateFound: new Date(2023, 3, 15),
+    status: 'open'
   },
   {
-    id: 'scan2',
+    id: '3',
     targetId: '2',
-    startTime: new Date('2023-05-05T10:15:00'),
-    endTime: new Date('2023-05-05T11:30:00'),
-    status: 'completed',
-    vulnerabilities: [mockVulnerabilities[1], mockVulnerabilities[6], mockVulnerabilities[7]],
-    summary: {
-      totalUrls: 85,
-      scannedUrls: 85,
-      highSeverity: 1,
-      mediumSeverity: 0,
-      lowSeverity: 2,
-      infoSeverity: 0
-    }
+    reportId: '2',
+    name: 'Broken Authentication',
+    severity: 'medium',
+    type: 'Broken Authentication',
+    description: 'The application does not properly validate user credentials.',
+    location: '/login',
+    dateFound: new Date(2023, 4, 2),
+    status: 'pending review'
   },
   {
-    id: 'scan3',
+    id: '4',
     targetId: '3',
-    startTime: new Date('2023-05-12T08:45:00'),
-    status: 'in_progress',
-    vulnerabilities: [mockVulnerabilities[4], mockVulnerabilities[8]],
-    summary: {
-      totalUrls: 200,
-      scannedUrls: 75,
-      highSeverity: 0,
-      mediumSeverity: 2,
-      lowSeverity: 0,
-      infoSeverity: 0
-    }
-  },
-  {
-    id: 'scan4',
-    targetId: '1',
-    startTime: new Date('2023-04-10T09:30:00'),
-    endTime: new Date('2023-04-10T10:45:00'),
-    status: 'completed',
-    vulnerabilities: [
-      mockVulnerabilities[0],
-      mockVulnerabilities[2],
-      mockVulnerabilities[3],
-      mockVulnerabilities[9]
-    ],
-    summary: {
-      totalUrls: 115,
-      scannedUrls: 115,
-      highSeverity: 1,
-      mediumSeverity: 1,
-      lowSeverity: 1,
-      infoSeverity: 1
-    }
+    reportId: '3',
+    name: 'Rate Limiting Bypass',
+    severity: 'low',
+    type: 'Rate Limiting',
+    description: 'The API is vulnerable to rate limiting bypass.',
+    location: '/api/v1/users',
+    dateFound: new Date(2023, 4, 10),
+    status: 'closed'
   }
 ];
 
-export const mockSubscriptionPlans: SubscriptionPlan[] = [
-  {
-    id: 'free',
-    name: 'Free',
-    price: 0,
-    billingCycle: 'monthly',
-    features: {
-      maxTargets: 1,
-      maxScansPerMonth: 5,
-      advancedReports: false,
-      apiAccess: false,
-      supportLevel: 'email',
-      scanTypes: ['quick'],
-      scanDepth: ['shallow']
-    }
-  },
-  {
-    id: 'premium',
-    name: 'Premium',
-    price: 49.99,
-    billingCycle: 'monthly',
-    features: {
-      maxTargets: 5,
-      maxScansPerMonth: 20,
-      advancedReports: true,
-      apiAccess: false,
-      supportLevel: 'priority',
-      scanTypes: ['quick', 'full'],
-      scanDepth: ['shallow', 'normal']
-    }
-  },
-  {
-    id: 'enterprise',
-    name: 'Enterprise',
-    price: 199.99,
-    billingCycle: 'monthly',
-    features: {
-      maxTargets: 20,
-      maxScansPerMonth: 100,
-      advancedReports: true,
-      apiAccess: true,
-      supportLevel: '24/7',
-      scanTypes: ['quick', 'full', 'custom'],
-      scanDepth: ['shallow', 'normal', 'deep']
-    }
-  }
-];
+// Function to generate random vulnerability data
+const generateRandomVulnerability = (targetId: string, reportId: string): Vulnerability => {
+  const severityOptions = ['critical', 'high', 'medium', 'low'];
+  const typeOptions = ['XSS', 'SQL Injection', 'CSRF', 'Broken Authentication', 'API Security'];
+  const statusOptions = ['open', 'closed', 'pending review'];
 
-export const mockReports: Report[] = [
-  {
-    id: 'r1',
-    name: 'Example Website Full Report - May 2023',
-    scanId: 'scan1',
-    targetId: '1',
-    createdAt: new Date('2023-05-10T15:25:00'),
-    format: 'pdf',
-    url: '/reports/example-website-may-2023.pdf'
-  },
-  {
-    id: 'r2',
-    name: 'Example Blog Security Report - May 2023',
-    scanId: 'scan2',
-    targetId: '2',
-    createdAt: new Date('2023-05-05T11:35:00'),
-    format: 'html',
-    url: '/reports/example-blog-may-2023.html'
-  },
-  {
-    id: 'r3',
-    name: 'Example Website Monthly Report - April 2023',
-    scanId: 'scan4',
-    targetId: '1',
-    createdAt: new Date('2023-04-10T10:50:00'),
-    format: 'pdf',
-    url: '/reports/example-website-april-2023.pdf'
+  return {
+    id: faker.string.uuid(),
+    targetId: targetId,
+    reportId: reportId,
+    name: faker.lorem.sentence(),
+    severity: faker.helpers.arrayElement(severityOptions) as 'critical' | 'high' | 'medium' | 'low',
+    type: faker.helpers.arrayElement(typeOptions),
+    description: faker.lorem.paragraph(),
+    location: faker.internet.url(),
+    dateFound: faker.date.past(),
+    status: faker.helpers.arrayElement(statusOptions) as 'open' | 'closed' | 'pending review',
+  };
+};
+
+// Function to generate a list of random vulnerabilities
+export const generateRandomVulnerabilities = (targetId: string, reportId: string, count: number): Vulnerability[] => {
+  const vulnerabilities: Vulnerability[] = [];
+  for (let i = 0; i < count; i++) {
+    vulnerabilities.push(generateRandomVulnerability(targetId, reportId));
   }
-];
+  return vulnerabilities;
+};
