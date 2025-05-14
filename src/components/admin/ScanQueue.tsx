@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -66,7 +65,7 @@ export default function ScanQueue() {
       case 'scanning':
         return <Badge variant="secondary" className="flex items-center"><Activity className="mr-1 h-3 w-3 animate-pulse" /> In Progress</Badge>;
       case 'completed':
-        return <Badge variant="success" className="bg-green-100 text-green-800 flex items-center"><CheckCircle className="mr-1 h-3 w-3" /> Completed</Badge>;
+        return <Badge variant="secondary" className="bg-green-100 text-green-800 flex items-center"><CheckCircle className="mr-1 h-3 w-3" /> Completed</Badge>;
       case 'failed':
         return <Badge variant="destructive" className="flex items-center">Failed</Badge>;
       default:
