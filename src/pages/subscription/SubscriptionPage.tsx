@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { toast } from "@/components/ui/use-toast";
 
 const SubscriptionPage = () => {
   const { t } = useLanguage();
@@ -122,9 +123,9 @@ const SubscriptionPage = () => {
     <div className="container max-w-7xl py-8">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold">{t('subscription.title', 'Subscription Plans')}</h1>
+          <h1 className="text-3xl font-bold">{t('subscription.title')}</h1>
           <p className="text-muted-foreground">
-            {t('subscription.subtitle', 'Choose the plan that suits your security needs')}
+            {t('subscription.subtitle')}
           </p>
         </div>
 
@@ -137,7 +138,7 @@ const SubscriptionPage = () => {
             >
               {plan.popular && (
                 <div className="bg-primary text-primary-foreground text-center py-1 text-sm font-medium">
-                  {t('subscription.mostPopular', 'Most Popular')}
+                  {t('subscription.mostPopular')}
                 </div>
               )}
               <CardHeader>
@@ -145,7 +146,7 @@ const SubscriptionPage = () => {
                   {plan.name}
                   {plan.current && (
                     <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
-                      {t('subscription.currentPlan', 'Current Plan')}
+                      {t('subscription.currentPlan')}
                     </span>
                   )}
                 </CardTitle>
@@ -174,10 +175,10 @@ const SubscriptionPage = () => {
                   onClick={() => handleSubscribe(plan.name)}
                 >
                   {plan.contact 
-                    ? t('subscription.contactUs', 'Contact Us') 
+                    ? t('subscription.contactUs') 
                     : plan.current 
-                      ? t('subscription.managePlan', 'Manage Plan')
-                      : t('subscription.subscribe', 'Subscribe')}
+                      ? t('subscription.managePlan')
+                      : t('subscription.subscribe')}
                 </Button>
               </CardFooter>
             </Card>
@@ -186,12 +187,12 @@ const SubscriptionPage = () => {
 
         {/* Feature Comparison Table */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold mb-6">{t('subscription.featureComparison', 'Feature Comparison')}</h2>
+          <h2 className="text-2xl font-bold mb-6">{t('subscription.featureComparison')}</h2>
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[200px]">{t('subscription.feature', 'Feature')}</TableHead>
+                  <TableHead className="w-[200px]">{t('subscription.feature')}</TableHead>
                   <TableHead className="text-center">Basic</TableHead>
                   <TableHead className="text-center">Premium</TableHead>
                   <TableHead className="text-center">Enterprise</TableHead>
@@ -214,77 +215,86 @@ const SubscriptionPage = () => {
         {/* Enterprise Contact Form */}
         {showContactForm && (
           <div className="mt-12 bg-muted/50 p-6 rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">{t('subscription.contactUs', 'Contact Us')}</h2>
+            <h2 className="text-2xl font-bold mb-4">{t('subscription.contactUs')}</h2>
             <p className="text-muted-foreground mb-6">
-              {t('subscription.contactDescription', 'Fill out the form below and our team will contact you to discuss your enterprise security needs.')}
+              {t('subscription.contactDescription')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-1">
-                    {t('subscription.name', 'Name')}
+                    {t('subscription.name')}
                   </label>
                   <input
                     id="name"
                     type="text"
                     className="w-full p-2 border rounded-md"
-                    placeholder={t('subscription.enterName', 'Enter your name')}
+                    placeholder={t('subscription.enterName')}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-1">
-                    {t('subscription.email', 'Email')}
+                    {t('subscription.email')}
                   </label>
                   <input
                     id="email"
                     type="email"
                     className="w-full p-2 border rounded-md"
-                    placeholder={t('subscription.enterEmail', 'Enter your email')}
+                    placeholder={t('subscription.enterEmail')}
                   />
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium mb-1">
-                    {t('subscription.company', 'Company')}
+                    {t('subscription.company')}
                   </label>
                   <input
                     id="company"
                     type="text"
                     className="w-full p-2 border rounded-md"
-                    placeholder={t('subscription.enterCompany', 'Enter your company name')}
+                    placeholder={t('subscription.enterCompany')}
                   />
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-1">
-                    {t('subscription.message', 'Message')}
+                    {t('subscription.message')}
                   </label>
                   <textarea
                     id="message"
                     className="w-full p-2 border rounded-md h-32"
-                    placeholder={t('subscription.enterMessage', 'Tell us about your security needs')}
+                    placeholder={t('subscription.enterMessage')}
                   ></textarea>
                 </div>
                 <div className="flex gap-4">
                   <Button onClick={() => setShowContactForm(false)} variant="outline">
-                    {t('subscription.cancel', 'Cancel')}
+                    {t('subscription.cancel')}
                   </Button>
-                  <Button className="flex items-center gap-2">
+                  <Button 
+                    className="flex items-center gap-2" 
+                    onClick={() => {
+                      toast({
+                        title: "Message Sent",
+                        description: "We'll get back to you within 24 hours.",
+                      });
+                      setShowContactForm(false);
+                    }}
+                  >
                     <Mail className="h-4 w-4" />
-                    {t('subscription.sendMessage', 'Send Message')}
+                    {t('subscription.sendMessage')}
                   </Button>
                 </div>
               </div>
               <div>
                 <div className="bg-card rounded-lg p-6 h-full">
-                  <h3 className="text-xl font-semibold mb-4">{t('subscription.whyEnterprise', 'Why Choose Enterprise?')}</h3>
+                  <h3 className="text-xl font-semibold mb-4">{t('subscription.whyEnterprise')}</h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
                       <div className="bg-primary/10 p-2 rounded-full">
                         <Shield className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-medium">{t('subscription.dedicatedSupport', 'Dedicated Support Team')}</h4>
+                        <h4 className="font-medium">{t('subscription.dedicatedSupport')}</h4>
                         <p className="text-sm text-muted-foreground">
-                          {t('subscription.dedicatedSupportDesc', 'Get direct access to our security experts 24/7')}
+                          {t('subscription.dedicatedSupportDesc')}
                         </p>
                       </div>
                     </div>
@@ -293,14 +303,14 @@ const SubscriptionPage = () => {
                         <Target className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-medium">{t('subscription.unlimitedScans', 'Unlimited Scan Targets')}</h4>
+                        <h4 className="font-medium">{t('subscription.unlimitedScans')}</h4>
                         <p className="text-sm text-muted-foreground">
-                          {t('subscription.unlimitedScansDesc', 'Scan all of your assets without limitations')}
+                          {t('subscription.unlimitedScansDesc')}
                         </p>
                       </div>
                     </div>
                     <div className="mt-6">
-                      <h4 className="font-medium">{t('subscription.orContact', 'Or contact us directly:')}</h4>
+                      <h4 className="font-medium">{t('subscription.orContact')}</h4>
                       <p className="text-sm mt-2">
                         <strong>Email:</strong> enterprise@cybercrew.com<br />
                         <strong>Phone:</strong> +1 (800) 123-4567
@@ -315,7 +325,7 @@ const SubscriptionPage = () => {
 
         {/* Testimonials */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-6">{t('subscription.testimonials', 'What Our Customers Say')}</h2>
+          <h2 className="text-2xl font-bold mb-6">{t('subscription.testimonials')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -349,7 +359,7 @@ const SubscriptionPage = () => {
 
         {/* FAQ Section */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-6">{t('subscription.faq', 'Frequently Asked Questions')}</h2>
+          <h2 className="text-2xl font-bold mb-6">{t('subscription.faq')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {

@@ -23,7 +23,8 @@
     "analytics": "分析",
     "settings": "設定",
     "logout": "ログアウト",
-    "profile": "プロフィール"
+    "profile": "プロフィール",
+    "subscription": "サブスクリプション"
   },
   "targets": {
     "title": "ターゲット管理",
@@ -81,5 +82,35 @@
     "uploadReport": "レポートをアップロード",
     "sendReport": "レポートを送信",
     "scanQueue": "スキャンキュー"
+  },
+  "subscription": {
+    "title": "サブスクリプションプラン",
+    "subtitle": "あなたのセキュリティニーズに合ったプランを選択してください",
+    "mostPopular": "最も人気",
+    "currentPlan": "現在のプラン",
+    "subscribe": "購読する",
+    "managePlan": "プラン管理",
+    "contactUs": "お問い合わせ",
+    "featureComparison": "機能比較",
+    "feature": "機能",
+    "testimonials": "お客様の声",
+    "faq": "よくある質問",
+    "name": "お名前",
+    "email": "メールアドレス",
+    "company": "会社名",
+    "message": "メッセージ",
+    "enterName": "お名前を入力してください",
+    "enterEmail": "メールアドレスを入力してください",
+    "enterCompany": "会社名を入力してください",
+    "enterMessage": "セキュリティニーズについて教えてください",
+    "cancel": "キャンセル",
+    "sendMessage": "メッセージを送信",
+    "whyEnterprise": "なぜエンタープライズを選ぶのか？",
+    "dedicatedSupport": "専任サポートチーム",
+    "dedicatedSupportDesc": "セキュリティの専門家に24時間アクセス可能",
+    "unlimitedScans": "無制限のスキャンターゲット",
+    "unlimitedScansDesc": "すべての資産を制限なくスキャン",
+    "orContact": "または直接お問い合わせ：",
+    "contactDescription": "以下のフォームに記入してください。エンタープライズセキュリティニーズについて話し合うためにチームからご連絡します。"
   }
 }

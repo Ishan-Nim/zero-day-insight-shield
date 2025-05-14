@@ -23,7 +23,8 @@
     "analytics": "Analytics",
     "settings": "Settings",
     "logout": "Logout",
-    "profile": "Profile"
+    "profile": "Profile",
+    "subscription": "Subscription"
   },
   "targets": {
     "title": "Target Management",
@@ -81,5 +82,35 @@
     "uploadReport": "Upload Report",
     "sendReport": "Send Report",
     "scanQueue": "Scan Queue"
+  },
+  "subscription": {
+    "title": "Subscription Plans",
+    "subtitle": "Choose the plan that suits your security needs",
+    "mostPopular": "Most Popular",
+    "currentPlan": "Current Plan",
+    "subscribe": "Subscribe",
+    "managePlan": "Manage Plan",
+    "contactUs": "Contact Us",
+    "featureComparison": "Feature Comparison",
+    "feature": "Feature",
+    "testimonials": "What Our Customers Say",
+    "faq": "Frequently Asked Questions",
+    "name": "Name",
+    "email": "Email",
+    "company": "Company",
+    "message": "Message",
+    "enterName": "Enter your name",
+    "enterEmail": "Enter your email",
+    "enterCompany": "Enter your company name",
+    "enterMessage": "Tell us about your security needs",
+    "cancel": "Cancel",
+    "sendMessage": "Send Message",
+    "whyEnterprise": "Why Choose Enterprise?",
+    "dedicatedSupport": "Dedicated Support Team",
+    "dedicatedSupportDesc": "Get direct access to our security experts 24/7",
+    "unlimitedScans": "Unlimited Scan Targets",
+    "unlimitedScansDesc": "Scan all of your assets without limitations",
+    "orContact": "Or contact us directly:",
+    "contactDescription": "Fill out the form below and our team will contact you to discuss your enterprise security needs."
   }
 }
