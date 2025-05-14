@@ -1,6 +1,6 @@
 
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { toast } from "@/components/ui/use-toast";
+import { useToast as useToastHook } from "@/components/ui/use-toast";
 
 interface User {
   id: string;
@@ -46,6 +46,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { toast } = useToastHook();
 
   useEffect(() => {
     // Check for stored user on mount

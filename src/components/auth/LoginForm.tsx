@@ -22,9 +22,14 @@ export default function LoginForm() {
 
     try {
       await login(email, password);
+      toast({
+        title: "Login successful",
+        description: "Welcome back to Cyber Crew!",
+      });
       navigate("/");
     } catch (error) {
       console.error("Login error:", error);
+      // Toast is already shown in the AuthContext
     } finally {
       setIsSubmitting(false);
     }
