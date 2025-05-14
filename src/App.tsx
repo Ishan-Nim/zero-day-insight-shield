@@ -15,6 +15,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import TargetsPage from "./pages/targets/TargetsPage";
+import ReportsPage from "./pages/reports/ReportsPage";
+import AnalyticsPage from "./pages/analytics/AnalyticsPage";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +44,34 @@ const App = () => (
                 <Layout>
                   <ProtectedRoute>
                     <TargetsPage />
+                  </ProtectedRoute>
+                </Layout>
+              } />
+
+              <Route path="/reports" element={
+                <Layout>
+                  <ProtectedRoute>
+                    <ReportsPage />
+                  </ProtectedRoute>
+                </Layout>
+              } />
+              
+              <Route path="/analytics" element={
+                <Layout>
+                  <ProtectedRoute>
+                    <ReportsPage />
+                  </ProtectedRoute>
+                </Layout>
+              } />
+
+              <Route path="/admin" element={
+                <Layout>
+                  <ProtectedRoute requiredRole="admin">
+                    {/* Admin panel will be implemented */}
+                    <div className="p-6">
+                      <h1 className="text-2xl font-bold mb-6">Admin Panel</h1>
+                      <p>This is the admin panel, only accessible to administrators.</p>
+                    </div>
                   </ProtectedRoute>
                 </Layout>
               } />

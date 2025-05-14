@@ -65,9 +65,9 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Analytics', href: '/analytics', icon: PieChart },
   ];
 
-  if (isAuthenticated && currentUser?.role === 'admin') {
-    navigationItems.push({ name: 'Admin Panel', href: '/admin', icon: Settings });
-  }
+  // Only show admin panel in sidebar for users with admin role
+  // Note: It's not shown in the UI for regular users
+  const isAdmin = isAuthenticated && currentUser?.role === 'admin';
 
   return (
     <div className="flex h-screen bg-background">
@@ -105,6 +105,18 @@ export default function Layout({ children }: LayoutProps) {
                   </Link>
                 </li>
               ))}
+              
+              {isAdmin && (
+                <li>
+                  <Link 
+                    to="/admin"
+                    className="flex items-center px-3 py-2 text-sidebar-foreground rounded-md hover:bg-sidebar-accent group"
+                  >
+                    <Settings className="mr-3 h-5 w-5" />
+                    <span>Admin Panel</span>
+                  </Link>
+                </li>
+              )}
             </ul>
             <div className="mt-8 px-3">
               <div className="py-2 text-xs uppercase text-sidebar-foreground/70">Subscription</div>

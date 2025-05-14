@@ -1,17 +1,21 @@
 
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScanTarget } from "@/types";
 import { formatDistanceToNow } from "date-fns";
-import { ChevronRight, PlayCircle } from "lucide-react";
+import { ChevronRight, PlayCircle, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { toast } from "@/components/ui/use-toast";
 
 interface TargetsOverviewProps {
   targets: ScanTarget[];
 }
 
 export default function TargetsOverview({ targets }: TargetsOverviewProps) {
+  const [scanningTargets, setScanningTargets] = useState<{[key: string]: boolean}>({});
+  
   const getTargetStatusIndicator = (status: string) => {
     switch (status) {
       case "active":
@@ -46,6 +50,21 @@ export default function TargetsOverview({ targets }: TargetsOverviewProps) {
     }
   };
 
+  const handleScan = (targetId: string) => {
+    setScanningTargets(prev => ({ ...prev, [targetId]: true }));
+    
+    // Simulate a delay to show the scanning animation
+    setTimeout(() => {
+      setScanningTargets(prev => ({ ...prev, [targetId]: false }));
+      
+      toast({
+        title: "Scan Request Received",
+        description: "We'll notify you by email once the scan is complete. Our security team will manually review the results before sending.",
+        duration: 5000,
+      });
+    }, 3000);
+  };
+
   return (
     <Card className="h-full">
       <CardHeader className="pb-3">
@@ -68,9 +87,23 @@ export default function TargetsOverview({ targets }: TargetsOverviewProps) {
                   )}
                 </div>
               </div>
-              <Button variant="ghost" size="sm">
-                <PlayCircle className="h-4 w-4 mr-1" />
-                Scan
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => handleScan(target.id)}
+                disabled={scanningTargets[target.id]}
+              >
+                {scanningTargets[target.id] ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-1 animate-spin" />
+                    Scanning...
+                  </>
+                ) : (
+                  <>
+                    <PlayCircle className="h-4 w-4 mr-1" />
+                    Scan
+                  </>
+                )}
               </Button>
             </div>
           ))}
