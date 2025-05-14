@@ -21,11 +21,11 @@ export default function Layout({ children }: LayoutProps) {
   const isAuthPage = !isAuthenticated && (window.location.pathname === '/login' || window.location.pathname === '/signup');
 
   if (isAuthPage) {
-    return <div className="w-full min-h-screen bg-background">
-      <main className="w-full h-full">
+    return (
+      <div className="w-full h-full">
         {children}
-      </main>
-    </div>;
+      </div>
+    );
   }
 
   return (
@@ -42,7 +42,7 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Main content - full width */}
       <div className="flex-1 flex flex-col overflow-hidden w-full">
-        {/* Navbar */}
+        {/* Header */}
         {isAuthenticated && (
           <Header 
             setSidebarOpen={setSidebarOpen} 
