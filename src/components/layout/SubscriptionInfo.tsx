@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { CreditCard } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { User } from "@/integrations/supabase/types";
+import { User } from "@/types"; // Updated import path to use the local User type
 
 interface SubscriptionInfoProps {
   currentUser: User | null;

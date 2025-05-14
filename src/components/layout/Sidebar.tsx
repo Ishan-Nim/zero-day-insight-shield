@@ -4,7 +4,7 @@ import { Menu } from "lucide-react";
 import { CcrLogo } from "@/components/CcrLogo";
 import { SidebarNavigation } from "./SidebarNavigation";
 import { SubscriptionInfo } from "./SubscriptionInfo";
-import { User } from "@/integrations/supabase/types";
+import { User } from "@/types"; // Updated import path to use the local User type
 
 interface SidebarProps {
   sidebarOpen: boolean;
