@@ -1,10 +1,11 @@
 
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { X } from "lucide-react";
 import { CcrLogo } from "@/components/CcrLogo";
 import { SidebarNavigation } from "./SidebarNavigation";
 import { SubscriptionInfo } from "./SubscriptionInfo";
 import { User } from "@/types"; // This is the correct import path
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -19,24 +20,28 @@ export const SidebarComponent = ({
   isAdmin, 
   currentUser 
 }: SidebarProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <aside 
       className={`fixed inset-y-0 left-0 z-20 flex-shrink-0 w-64 bg-sidebar transition-all duration-300 ease-in-out transform ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } md:translate-x-0 md:static md:inset-auto flex flex-col h-full`}
+      } md:translate-x-0 md:static md:inset-auto flex flex-col h-screen`}
     >
       <div className="flex items-center justify-between px-4 py-3 h-16 bg-sidebar-accent">
-        <div className="flex items-center flex-1 justify-center">
-          <CcrLogo size="md" />
+        <div className="flex items-center justify-center w-full">
+          <CcrLogo size="md" className="text-[#00b3b0]" />
         </div>
-        <Button 
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        >
-          <Menu className="h-5 w-5 text-sidebar-foreground" />
-        </Button>
+        {isMobile && (
+          <Button 
+            variant="ghost"
+            size="icon"
+            className="md:hidden text-sidebar-foreground"
+            onClick={() => setSidebarOpen(false)}
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        )}
       </div>
       
       <SidebarNavigation isAdmin={isAdmin} />

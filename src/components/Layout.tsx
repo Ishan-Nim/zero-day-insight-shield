@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { SidebarComponent } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,7 +11,8 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const { currentUser, isAuthenticated } = useAuth();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const isMobile = useIsMobile();
   
   // Only show admin panel in sidebar for users with admin role
   const isAdmin = isAuthenticated && currentUser?.role === 'admin';
@@ -19,7 +21,7 @@ export default function Layout({ children }: LayoutProps) {
   const isAuthPage = !isAuthenticated && (window.location.pathname === '/login' || window.location.pathname === '/signup');
 
   if (isAuthPage) {
-    return <div className="w-full h-screen bg-background">
+    return <div className="w-full min-h-screen bg-background">
       <main className="w-full h-full">
         {children}
       </main>
@@ -27,7 +29,7 @@ export default function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <div className="flex h-screen w-full bg-background">
+    <div className="flex h-screen w-full bg-background overflow-hidden">
       {/* Sidebar for authenticated users */}
       {isAuthenticated && (
         <SidebarComponent 

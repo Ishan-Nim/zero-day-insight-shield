@@ -15,7 +15,7 @@ export const CcrLogo = ({ size = "md", className }: CcrLogoProps) => {
 
   return (
     <div className={cn("flex items-center", className)}>
-      <h1 className={cn("font-extrabold text-primary uppercase tracking-wider", sizeClasses[size])}>
+      <h1 className={cn("font-extrabold uppercase tracking-wider text-[#00b3b0]", sizeClasses[size])}>
         CYBER CREW
       </h1>
     </div>

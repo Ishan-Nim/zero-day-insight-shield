@@ -23,6 +23,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { CcrLogo } from "@/components/CcrLogo";
 import { Menu, Bell, LogOut, UserPlus } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface HeaderProps {
   setSidebarOpen: (open: boolean) => void;
@@ -33,6 +34,7 @@ export const Header = ({ setSidebarOpen, isAuthenticated }: HeaderProps) => {
   const { currentUser, logout } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   
   const handleLogout = () => {
     logout();
@@ -50,13 +52,13 @@ export const Header = ({ setSidebarOpen, isAuthenticated }: HeaderProps) => {
 
   return (
     <header className="bg-white dark:bg-background shadow-sm border-b w-full">
-      <div className="flex items-center justify-between h-16 px-4 w-full">
+      <div className="flex items-center justify-between h-16 px-4 w-full max-w-full">
         <div className="flex items-center">
-          {isAuthenticated && (
+          {isAuthenticated && isMobile && (
             <Button 
               variant="ghost"
               size="icon"
-              className="md:hidden mr-2"
+              className="mr-2"
               onClick={() => setSidebarOpen(true)}
             >
               <Menu className="h-5 w-5" />
@@ -65,7 +67,7 @@ export const Header = ({ setSidebarOpen, isAuthenticated }: HeaderProps) => {
           
           {/* Always show logo in header */}
           <div className="flex items-center">
-            <CcrLogo size="md" />
+            <CcrLogo size="md" className="ml-2" />
           </div>
         </div>
 
@@ -81,7 +83,7 @@ export const Header = ({ setSidebarOpen, isAuthenticated }: HeaderProps) => {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="relative inline-flex items-center justify-center h-8 w-8 rounded-full">
                 <Avatar className="h-8 w-8">
-                  <AvatarFallback className="bg-primary text-primary-foreground">
+                  <AvatarFallback className="bg-[#00b3b0] text-white">
                     {currentUser?.name ? getInitials(currentUser.name) : currentUser?.email.substring(0, 2).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
