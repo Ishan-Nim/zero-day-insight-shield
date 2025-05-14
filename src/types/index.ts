@@ -1,4 +1,3 @@
-
 export interface User {
   id: string;
   email: string;
@@ -73,10 +72,16 @@ export interface SubscriptionPlan {
 
 export interface Report {
   id: string;
-  name: string;
-  scanId: string;
-  targetId: string;
-  createdAt: Date;
-  format: 'pdf' | 'html' | 'csv';
-  url: string;
+  targetName: string;
+  scanDate: Date;
+  status: "ready" | "pending";
+  vulnerabilities: {
+    critical?: number;
+    high: number;
+    medium: number;
+    low: number;
+    info: number;
+  };
+  vulnerabilityTypes?: string[];
+  reportSent: boolean;
 }

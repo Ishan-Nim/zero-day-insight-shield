@@ -59,7 +59,7 @@ const App = () => (
               <Route path="/analytics" element={
                 <Layout>
                   <ProtectedRoute>
-                    <ReportsPage />
+                    <AnalyticsPage />
                   </ProtectedRoute>
                 </Layout>
               } />

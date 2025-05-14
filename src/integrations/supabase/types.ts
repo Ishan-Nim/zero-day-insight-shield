@@ -9,7 +9,131 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      audit_logs: {
+        Row: {
+          action_type: string
+          created_at: string
+          details: Json | null
+          entity_id: string
+          entity_type: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          action_type: string
+          created_at?: string
+          details?: Json | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          action_type?: string
+          created_at?: string
+          details?: Json | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          created_at: string
+          created_by: string
+          file_path: string | null
+          file_type: string
+          id: string
+          recipient_email: string | null
+          sent_at: string | null
+          summary_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          file_path?: string | null
+          file_type: string
+          id?: string
+          recipient_email?: string | null
+          sent_at?: string | null
+          summary_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          file_path?: string | null
+          file_type?: string
+          id?: string
+          recipient_email?: string | null
+          sent_at?: string | null
+          summary_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_summary_id_fkey"
+            columns: ["summary_id"]
+            isOneToOne: false
+            referencedRelation: "vulnerability_summaries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      vulnerability_summaries: {
+        Row: {
+          created_at: string
+          created_by: string
+          critical_count: number | null
+          customer_id: string
+          high_count: number
+          id: string
+          low_count: number
+          medium_count: number
+          report_id: string | null
+          report_sent: boolean | null
+          scan_date: string
+          target_id: string
+          updated_at: string
+          updated_by: string | null
+          vulnerability_types: string[]
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          critical_count?: number | null
+          customer_id: string
+          high_count: number
+          id?: string
+          low_count: number
+          medium_count: number
+          report_id?: string | null
+          report_sent?: boolean | null
+          scan_date?: string
+          target_id: string
+          updated_at?: string
+          updated_by?: string | null
+          vulnerability_types: string[]
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          critical_count?: number | null
+          customer_id?: string
+          high_count?: number
+          id?: string
+          low_count?: number
+          medium_count?: number
+          report_id?: string | null
+          report_sent?: boolean | null
+          scan_date?: string
+          target_id?: string
+          updated_at?: string
+          updated_by?: string | null
+          vulnerability_types?: string[]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
