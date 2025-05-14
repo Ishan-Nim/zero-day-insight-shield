@@ -37,7 +37,7 @@ export default function LoginForm() {
           <div className="flex justify-center mb-1">
             <Shield className="h-10 w-10 text-primary" />
           </div>
-          <h1 className="text-2xl font-semibold tracking-tight">Welcome to ZeroDay</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Welcome to Cyber Crew</h1>
           <p className="text-sm text-muted-foreground">
             Enter your credentials to access your account
           </p>

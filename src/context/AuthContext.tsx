@@ -122,7 +122,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       toast({
         title: "Account created",
-        description: `Welcome to ZeroDay, ${name}!`,
+        description: `Welcome to Cyber Crew, ${name}!`,
       });
     } catch (error: any) {
       toast({
