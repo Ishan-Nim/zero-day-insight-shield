@@ -15,11 +15,13 @@ export const CcrLogo = ({ size = "md", className }: CcrLogoProps) => {
 
   return (
     <div className={cn("flex items-center", className)}>
-      <img 
-        src="/lovable-uploads/d04b325d-bd11-40fc-83cf-27788bf96a6d.png"
-        alt="CCR Scanner Logo" 
-        className={cn(sizeClasses[size])}
-      />
+      <div className="bg-[#1e293b] p-1 rounded flex items-center justify-center">
+        <img 
+          src="/lovable-uploads/63cf3b7b-1fc0-417b-a6dd-70515bd126c8.png"
+          alt="CCR Scanner Logo" 
+          className={cn(sizeClasses[size])}
+        />
+      </div>
     </div>
   );
 };
