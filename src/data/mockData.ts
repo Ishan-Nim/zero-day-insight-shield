@@ -1,5 +1,5 @@
-import { faker } from '@faker-js/faker';
 
+// ScanTarget interface from this file
 export interface ScanTarget {
   id: string;
   name: string;
@@ -9,6 +9,11 @@ export interface ScanTarget {
   verified: boolean;
   status: 'active' | 'inactive' | 'scanning';
   lastScan?: Date;
+  // Adding the missing properties to match types/index.ts
+  owner: string;
+  createdAt: Date;
+  scanDepth?: 'shallow' | 'normal' | 'deep';
+  excludedPaths?: string[];
 }
 
 export interface Customer {
@@ -20,7 +25,6 @@ export interface Customer {
   riskLevel: 'high' | 'medium' | 'low';
 }
 
-// Update the Report type to include the 'name' property if it's being used
 export interface Report {
   id: string;
   targetId: string;
@@ -28,7 +32,7 @@ export interface Report {
   customerId: string;
   scanDate: Date;
   vulnerabilities: {
-    critical: number;
+    critical?: number;
     high: number;
     medium: number;
     low: number;
@@ -50,6 +54,7 @@ export interface Vulnerability {
   status: 'open' | 'closed' | 'pending review';
 }
 
+// Updated mockTargets to include required fields
 export const mockTargets: ScanTarget[] = [
   {
     id: '1',
@@ -59,7 +64,9 @@ export const mockTargets: ScanTarget[] = [
     customerId: '2',
     verified: true,
     status: 'active',
-    lastScan: new Date(2023, 1, 1)
+    lastScan: new Date(2023, 1, 1),
+    owner: 'user123',
+    createdAt: new Date(2022, 9, 15)
   },
   {
     id: '2',
@@ -69,7 +76,9 @@ export const mockTargets: ScanTarget[] = [
     customerId: '2',
     verified: false,
     status: 'active',
-    lastScan: new Date(2023, 2, 15)
+    lastScan: new Date(2023, 2, 15),
+    owner: 'user123',
+    createdAt: new Date(2022, 10, 1)
   },
   {
     id: '3',
@@ -79,7 +88,9 @@ export const mockTargets: ScanTarget[] = [
     customerId: '2',
     verified: true,
     status: 'scanning',
-    lastScan: new Date(2023, 3, 1)
+    lastScan: new Date(2023, 3, 1),
+    owner: 'user123',
+    createdAt: new Date(2022, 10, 20)
   },
   {
     id: '4',
@@ -89,7 +100,9 @@ export const mockTargets: ScanTarget[] = [
     customerId: '2',
     verified: false,
     status: 'inactive',
-    lastScan: new Date(2022, 12, 1)
+    lastScan: new Date(2022, 12, 1),
+    owner: 'user123',
+    createdAt: new Date(2022, 8, 5) 
   },
   {
     id: '5',
@@ -99,7 +112,9 @@ export const mockTargets: ScanTarget[] = [
     customerId: '2',
     verified: true,
     status: 'active',
-    lastScan: new Date(2023, 4, 1)
+    lastScan: new Date(2023, 4, 1),
+    owner: 'user123',
+    createdAt: new Date(2022, 11, 10)
   }
 ];
 
@@ -130,7 +145,6 @@ export const mockCustomers: Customer[] = [
   }
 ];
 
-// Update the mockReports to match the Report interface
 export const mockReports: Report[] = [
   {
     id: '1',
@@ -230,31 +244,118 @@ export const mockVulnerabilities: Vulnerability[] = [
   }
 ];
 
-// Function to generate random vulnerability data
-const generateRandomVulnerability = (targetId: string, reportId: string): Vulnerability => {
-  const severityOptions = ['critical', 'high', 'medium', 'low'];
-  const typeOptions = ['XSS', 'SQL Injection', 'CSRF', 'Broken Authentication', 'API Security'];
-  const statusOptions = ['open', 'closed', 'pending review'];
+// Create mock scan results that match the ScanResult interface
+export const mockScanResults = [
+  {
+    id: '1',
+    targetId: '1',
+    startTime: new Date(2023, 3, 15, 9, 0), 
+    endTime: new Date(2023, 3, 15, 10, 30),
+    status: 'completed',
+    vulnerabilities: mockVulnerabilities.filter(v => v.targetId === '1'),
+    summary: {
+      totalUrls: 150,
+      scannedUrls: 145,
+      highSeverity: 3,
+      mediumSeverity: 7,
+      lowSeverity: 12,
+      infoSeverity: 5
+    }
+  },
+  {
+    id: '2',
+    targetId: '2',
+    startTime: new Date(2023, 4, 2, 14, 0),
+    endTime: new Date(2023, 4, 2, 15, 15),
+    status: 'completed',
+    vulnerabilities: mockVulnerabilities.filter(v => v.targetId === '2'),
+    summary: {
+      totalUrls: 80,
+      scannedUrls: 78,
+      highSeverity: 2,
+      mediumSeverity: 5,
+      lowSeverity: 8,
+      infoSeverity: 3
+    }
+  },
+  {
+    id: '3',
+    targetId: '3',
+    startTime: new Date(2023, 4, 10, 11, 0),
+    status: 'in_progress',
+    vulnerabilities: [],
+    summary: {
+      totalUrls: 120,
+      scannedUrls: 45,
+      highSeverity: 0,
+      mediumSeverity: 0,
+      lowSeverity: 0,
+      infoSeverity: 0
+    }
+  },
+  {
+    id: '4',
+    targetId: '4',
+    startTime: new Date(2023, 4, 12, 9, 30),
+    status: 'queued',
+    vulnerabilities: [],
+    summary: {
+      totalUrls: 0,
+      scannedUrls: 0,
+      highSeverity: 0,
+      mediumSeverity: 0,
+      lowSeverity: 0,
+      infoSeverity: 0
+    }
+  },
+  {
+    id: '5',
+    targetId: '5',
+    startTime: new Date(2023, 4, 8, 14, 0),
+    endTime: new Date(2023, 4, 8, 14, 15),
+    status: 'failed',
+    vulnerabilities: [],
+    summary: {
+      totalUrls: 10,
+      scannedUrls: 5,
+      highSeverity: 0,
+      mediumSeverity: 0,
+      lowSeverity: 0,
+      infoSeverity: 0
+    },
+    error: 'Connection timeout after 15 seconds'
+  }
+];
 
-  return {
-    id: faker.string.uuid(),
-    targetId: targetId,
-    reportId: reportId,
-    name: faker.lorem.sentence(),
-    severity: faker.helpers.arrayElement(severityOptions) as 'critical' | 'high' | 'medium' | 'low',
-    type: faker.helpers.arrayElement(typeOptions),
-    description: faker.lorem.paragraph(),
-    location: faker.internet.url(),
-    dateFound: faker.date.past(),
-    status: faker.helpers.arrayElement(statusOptions) as 'open' | 'closed' | 'pending review',
-  };
-};
+// Function to generate a UUID-like string without external dependencies
+function generateUUID(): string {
+  return 'xxxx-xxxx-xxxx-xxxx'.replace(/[x]/g, () => {
+    const r = Math.floor(Math.random() * 16);
+    return r.toString(16);
+  });
+}
 
-// Function to generate a list of random vulnerabilities
+// Modified to not use faker
 export const generateRandomVulnerabilities = (targetId: string, reportId: string, count: number): Vulnerability[] => {
   const vulnerabilities: Vulnerability[] = [];
+  const severityOptions: ('critical' | 'high' | 'medium' | 'low')[] = ['critical', 'high', 'medium', 'low'];
+  const typeOptions: string[] = ['XSS', 'SQL Injection', 'CSRF', 'Broken Authentication', 'API Security'];
+  const statusOptions: ('open' | 'closed' | 'pending review')[] = ['open', 'closed', 'pending review'];
+  
   for (let i = 0; i < count; i++) {
-    vulnerabilities.push(generateRandomVulnerability(targetId, reportId));
+    vulnerabilities.push({
+      id: generateUUID(),
+      targetId: targetId,
+      reportId: reportId,
+      name: `Sample Vulnerability ${i + 1}`,
+      severity: severityOptions[Math.floor(Math.random() * severityOptions.length)],
+      type: typeOptions[Math.floor(Math.random() * typeOptions.length)],
+      description: 'This is a sample vulnerability description.',
+      location: `https://example.com/path/${i}`,
+      dateFound: new Date(),
+      status: statusOptions[Math.floor(Math.random() * statusOptions.length)]
+    });
   }
+  
   return vulnerabilities;
 };
