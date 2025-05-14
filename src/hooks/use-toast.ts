@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { toast as sonnerToast, type ToastT } from "sonner";
 
@@ -14,6 +13,8 @@ export type ToastProps = {
 // Create a type that merges our custom properties with Sonner's options
 export type ToasterToast = ToastProps & {
   id: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
 const toastActionTypes = {
