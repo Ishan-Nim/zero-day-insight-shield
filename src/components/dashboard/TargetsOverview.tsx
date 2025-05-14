@@ -5,9 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScanTarget } from "@/types";
 import { formatDistanceToNow } from "date-fns";
-import { ChevronRight, PlayCircle, Loader2 } from "lucide-react";
+import { ChevronRight, PlayCircle, Loader2, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
+import { useLanguage } from "@/i18n";
+import { useAdminNotifications } from "@/context/AdminNotificationContext";
+import { useAuth } from "@/context/AuthContext";
 
 interface TargetsOverviewProps {
   targets: ScanTarget[];
@@ -15,6 +18,9 @@ interface TargetsOverviewProps {
 
 export default function TargetsOverview({ targets }: TargetsOverviewProps) {
   const [scanningTargets, setScanningTargets] = useState<{[key: string]: boolean}>({});
+  const { t } = useLanguage();
+  const { addScanRequest } = useAdminNotifications();
+  const { currentUser } = useAuth();
   
   const getTargetStatusIndicator = (status: string) => {
     switch (status) {
@@ -25,7 +31,7 @@ export default function TargetsOverview({ targets }: TargetsOverviewProps) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
             </span>
-            Active
+            {t('targets.active')}
           </div>
         );
       case "scanning":
@@ -35,14 +41,14 @@ export default function TargetsOverview({ targets }: TargetsOverviewProps) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
             </span>
-            Scanning
+            {t('targets.scanning')}
           </div>
         );
       case "inactive":
         return (
           <div className="flex items-center">
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gray-300 mr-2"></span>
-            Inactive
+            {t('targets.inactive')}
           </div>
         );
       default:
@@ -50,7 +56,7 @@ export default function TargetsOverview({ targets }: TargetsOverviewProps) {
     }
   };
 
-  const handleScan = (targetId: string) => {
+  const handleScan = (targetId: string, targetName: string, targetUrl: string) => {
     setScanningTargets(prev => ({ ...prev, [targetId]: true }));
     
     // Simulate a delay to show the scanning animation
@@ -58,17 +64,28 @@ export default function TargetsOverview({ targets }: TargetsOverviewProps) {
       setScanningTargets(prev => ({ ...prev, [targetId]: false }));
       
       toast({
-        title: "Scan Request Received",
+        title: t('targets.scanStarted'),
         description: "We'll notify you by email once the scan is complete. Our security team will manually review the results before sending.",
         duration: 5000,
       });
+      
+      // Add to admin scan requests
+      if (currentUser) {
+        addScanRequest({
+          targetId,
+          targetName,
+          targetUrl,
+          userId: currentUser.id,
+          userEmail: currentUser.email
+        });
+      }
     }, 3000);
   };
 
   return (
     <Card className="h-full">
       <CardHeader className="pb-3">
-        <CardTitle>Your Targets</CardTitle>
+        <CardTitle>{t('targets.title')}</CardTitle>
         <CardDescription>Websites configured for vulnerability scanning</CardDescription>
       </CardHeader>
       <CardContent>
@@ -82,34 +99,44 @@ export default function TargetsOverview({ targets }: TargetsOverviewProps) {
                   {getTargetStatusIndicator(target.status)}
                   {target.lastScan && (
                     <span className="ml-4">
-                      Last scan: {formatDistanceToNow(target.lastScan, { addSuffix: true })}
+                      {t('targets.lastScan')}: {formatDistanceToNow(target.lastScan, { addSuffix: true })}
                     </span>
                   )}
                 </div>
               </div>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => handleScan(target.id)}
-                disabled={scanningTargets[target.id]}
-              >
-                {scanningTargets[target.id] ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-1 animate-spin" />
-                    Scanning...
-                  </>
-                ) : (
-                  <>
-                    <PlayCircle className="h-4 w-4 mr-1" />
-                    Scan
-                  </>
-                )}
-              </Button>
+              <div className="flex space-x-2">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => {}}
+                  className="flex items-center"
+                >
+                  <Clock className="h-4 w-4 mr-1" />
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => handleScan(target.id, target.name, target.url)}
+                  disabled={scanningTargets[target.id]}
+                >
+                  {scanningTargets[target.id] ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-1 animate-spin" />
+                      {t('targets.scanning')}
+                    </>
+                  ) : (
+                    <>
+                      <PlayCircle className="h-4 w-4 mr-1" />
+                      {t('targets.runScan')}
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           ))}
           {targets.length === 0 && (
             <div className="text-center py-4 text-muted-foreground">
-              No targets found. Add your first website to scan.
+              {t('targets.noTargets')}
             </div>
           )}
         </div>

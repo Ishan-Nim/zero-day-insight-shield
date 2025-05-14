@@ -33,6 +33,9 @@ import {
   UserPlus,
   CreditCard
 } from "lucide-react";
+import LanguageSwitcher from "./ui/LanguageSwitcher";
+import { useLanguage } from "@/i18n";
+import { toast } from "@/components/ui/use-toast";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -42,6 +45,7 @@ export default function Layout({ children }: LayoutProps) {
   const { currentUser, logout, isAuthenticated } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
+  const { t } = useLanguage();
   
   const handleLogout = () => {
     logout();
@@ -58,15 +62,13 @@ export default function Layout({ children }: LayoutProps) {
   };
 
   const navigationItems = [
-    { name: 'Dashboard', href: '/', icon: LayoutDashboard },
-    { name: 'Targets', href: '/targets', icon: Target },
-    { name: 'Scans', href: '/scans', icon: Shield },
-    { name: 'Reports', href: '/reports', icon: FileBarChart },
-    { name: 'Analytics', href: '/analytics', icon: PieChart },
+    { name: t('header.dashboard'), href: '/', icon: LayoutDashboard },
+    { name: t('header.targets'), href: '/targets', icon: Target },
+    { name: t('header.reports'), href: '/reports', icon: FileBarChart },
+    { name: t('header.analytics'), href: '/analytics', icon: PieChart },
   ];
 
   // Only show admin panel in sidebar for users with admin role
-  // Note: It's not shown in the UI for regular users
   const isAdmin = isAuthenticated && currentUser?.role === 'admin';
 
   return (
@@ -113,7 +115,7 @@ export default function Layout({ children }: LayoutProps) {
                     className="flex items-center px-3 py-2 text-sidebar-foreground rounded-md hover:bg-sidebar-accent group"
                   >
                     <Settings className="mr-3 h-5 w-5" />
-                    <span>Admin Panel</span>
+                    <span>{t('header.settings')}</span>
                   </Link>
                 </li>
               )}
@@ -158,12 +160,14 @@ export default function Layout({ children }: LayoutProps) {
               {!isAuthenticated && (
                 <div className="flex items-center">
                   <Shield className="h-6 w-6 text-primary mr-2" />
-                  <span className="font-semibold text-lg">ZeroDay Scanner</span>
+                  <span className="font-semibold text-lg">{t('header.title')}</span>
                 </div>
               )}
             </div>
 
             <div className="flex items-center space-x-4">
+              <LanguageSwitcher />
+              
               {isAuthenticated ? (
                 <>
                   <Button variant="ghost" size="icon" className="relative">
@@ -187,15 +191,15 @@ export default function Layout({ children }: LayoutProps) {
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onSelect={() => navigate("/profile")}>
-                        Profile
+                        {t('header.profile')}
                       </DropdownMenuItem>
                       <DropdownMenuItem onSelect={() => navigate("/settings")}>
-                        Settings
+                        {t('header.settings')}
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onSelect={handleLogout} className="text-destructive">
                         <LogOut className="w-4 h-4 mr-2" />
-                        Logout
+                        {t('header.logout')}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -204,11 +208,11 @@ export default function Layout({ children }: LayoutProps) {
                 <div className="flex items-center space-x-2">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline">Sign Up</Button>
+                      <Button variant="outline">{t('auth.signup')}</Button>
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>Create an Account</DialogTitle>
+                        <DialogTitle>{t('auth.signup')}</DialogTitle>
                         <DialogDescription>
                           Sign up to start scanning your websites for vulnerabilities.
                         </DialogDescription>
@@ -224,13 +228,13 @@ export default function Layout({ children }: LayoutProps) {
                         <div className="flex justify-center">
                           <Button className="w-full" onClick={() => navigate('/login')}>
                             <UserPlus className="mr-2 h-4 w-4" />
-                            Go to Login
+                            {t('header.login')}
                           </Button>
                         </div>
                       </div>
                     </DialogContent>
                   </Dialog>
-                  <Button onClick={() => navigate('/login')}>Login</Button>
+                  <Button onClick={() => navigate('/login')}>{t('auth.login')}</Button>
                 </div>
               )}
             </div>
