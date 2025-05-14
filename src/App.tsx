@@ -5,6 +5,7 @@ import "./App.css";
 import Dashboard from "@/pages/Dashboard";
 import Layout from "@/components/Layout";
 import TargetsPage from "@/pages/targets/TargetsPage";
+import ScansPage from "@/pages/scans/ScansPage";
 import ReportsPage from "@/pages/reports/ReportsPage";
 import AnalyticsPage from "@/pages/analytics/AnalyticsPage";
 import AdminPage from "@/pages/admin/AdminPage";
@@ -45,6 +46,14 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <TargetsPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/scans"
+                  element={
+                    <ProtectedRoute>
+                      <ScansPage />
                     </ProtectedRoute>
                   }
                 />
