@@ -41,20 +41,10 @@ export interface Report {
   status: 'sent' | 'pending' | 'failed';
 }
 
-export interface Vulnerability {
-  id: string;
-  targetId: string;
-  reportId: string;
-  name: string;
-  severity: 'critical' | 'high' | 'medium' | 'low';
-  type: string;
-  description: string;
-  location: string;
-  dateFound: Date;
-  status: 'open' | 'closed' | 'pending review';
-}
+// Import Vulnerability type from the types file
+import { Vulnerability as TypedVulnerability, ScanResult } from "@/types";
 
-// Updated mockTargets to include required fields
+// Add the missing mockTargets export
 export const mockTargets: ScanTarget[] = [
   {
     id: '1',
@@ -65,7 +55,7 @@ export const mockTargets: ScanTarget[] = [
     verified: true,
     status: 'active',
     lastScan: new Date(2023, 1, 1),
-    owner: 'user123',
+    owner: 'user-123',
     createdAt: new Date(2022, 9, 15)
   },
   {
@@ -77,8 +67,8 @@ export const mockTargets: ScanTarget[] = [
     verified: false,
     status: 'active',
     lastScan: new Date(2023, 2, 15),
-    owner: 'user123',
-    createdAt: new Date(2022, 10, 1)
+    owner: 'user-123',
+    createdAt: new Date(2022, 10, 5)
   },
   {
     id: '3',
@@ -89,8 +79,8 @@ export const mockTargets: ScanTarget[] = [
     verified: true,
     status: 'scanning',
     lastScan: new Date(2023, 3, 1),
-    owner: 'user123',
-    createdAt: new Date(2022, 10, 20)
+    owner: 'user-123',
+    createdAt: new Date(2022, 11, 10)
   },
   {
     id: '4',
@@ -101,8 +91,8 @@ export const mockTargets: ScanTarget[] = [
     verified: false,
     status: 'inactive',
     lastScan: new Date(2022, 12, 1),
-    owner: 'user123',
-    createdAt: new Date(2022, 8, 5) 
+    owner: 'user-123',
+    createdAt: new Date(2022, 8, 20)
   },
   {
     id: '5',
@@ -113,146 +103,72 @@ export const mockTargets: ScanTarget[] = [
     verified: true,
     status: 'active',
     lastScan: new Date(2023, 4, 1),
-    owner: 'user123',
-    createdAt: new Date(2022, 11, 10)
+    owner: 'user-123',
+    createdAt: new Date(2022, 7, 30)
   }
 ];
 
-export const mockCustomers: Customer[] = [
+// Updated mockVulnerabilities to match the Vulnerability type from types/index.ts
+export const mockVulnerabilities: TypedVulnerability[] = [
   {
     id: '1',
-    name: 'Acme Corp',
-    email: 'info@acmecorp.com',
-    industry: 'Technology',
-    numTargets: 5,
-    riskLevel: 'high'
-  },
-  {
-    id: '2',
-    name: 'Beta Co',
-    email: 'contact@betaco.com',
-    industry: 'Finance',
-    numTargets: 3,
-    riskLevel: 'medium'
-  },
-  {
-    id: '3',
-    name: 'Gamma Inc',
-    email: 'sales@gammainc.com',
-    industry: 'Healthcare',
-    numTargets: 8,
-    riskLevel: 'low'
-  }
-];
-
-export const mockReports: Report[] = [
-  {
-    id: '1',
-    targetId: '1',
-    targetName: 'Corporate Website',
-    customerId: '2',
-    scanDate: new Date(2023, 3, 15),
-    vulnerabilities: {
-      critical: 1,
-      high: 3,
-      medium: 7,
-      low: 12
-    },
-    vulnerabilityTypes: ['XSS', 'SQL Injection', 'CSRF'],
-    status: 'sent'
-  },
-  {
-    id: '2',
-    targetId: '2',
-    targetName: 'Customer Portal',
-    customerId: '2',
-    scanDate: new Date(2023, 4, 2),
-    vulnerabilities: {
-      critical: 0,
-      high: 2,
-      medium: 5,
-      low: 8
-    },
-    vulnerabilityTypes: ['XSS', 'Broken Authentication'],
-    status: 'sent'
-  },
-  {
-    id: '3',
-    targetId: '3',
-    targetName: 'API Gateway',
-    customerId: '2',
-    scanDate: new Date(2023, 4, 10),
-    vulnerabilities: {
-      critical: 2,
-      high: 4,
-      medium: 3,
-      low: 6
-    },
-    vulnerabilityTypes: ['API Security', 'Rate Limiting Bypass', 'Injection'],
-    status: 'pending'
-  }
-];
-
-export const mockVulnerabilities: Vulnerability[] = [
-  {
-    id: '1',
-    targetId: '1',
-    reportId: '1',
     name: 'Cross-Site Scripting (XSS)',
-    severity: 'high',
-    type: 'XSS',
     description: 'A cross-site scripting vulnerability was found in the search functionality.',
-    location: '/search?q=<script>alert("XSS")</script>',
-    dateFound: new Date(2023, 3, 15),
-    status: 'open'
+    severity: 'high',
+    url: '/search?q=<script>alert("XSS")</script>',
+    date: new Date(2023, 3, 15),
+    status: 'open',
+    category: 'XSS',
+    cwe: 'CWE-79',
+    remediation: 'Implement proper input validation and output encoding.'
   },
   {
     id: '2',
-    targetId: '1',
-    reportId: '1',
     name: 'SQL Injection',
-    severity: 'critical',
-    type: 'SQL Injection',
     description: 'A SQL injection vulnerability was found in the login form.',
-    location: '/login',
-    dateFound: new Date(2023, 3, 15),
-    status: 'open'
+    severity: 'high',
+    url: '/login',
+    date: new Date(2023, 3, 15),
+    status: 'open',
+    category: 'Injection',
+    cwe: 'CWE-89',
+    remediation: 'Use parameterized queries and input validation.'
   },
   {
     id: '3',
-    targetId: '2',
-    reportId: '2',
     name: 'Broken Authentication',
-    severity: 'medium',
-    type: 'Broken Authentication',
     description: 'The application does not properly validate user credentials.',
-    location: '/login',
-    dateFound: new Date(2023, 4, 2),
-    status: 'pending review'
+    severity: 'medium',
+    url: '/login',
+    date: new Date(2023, 4, 2),
+    status: 'fixed',
+    category: 'Authentication',
+    cwe: 'CWE-287',
+    remediation: 'Implement strong authentication mechanisms.'
   },
   {
     id: '4',
-    targetId: '3',
-    reportId: '3',
     name: 'Rate Limiting Bypass',
-    severity: 'low',
-    type: 'Rate Limiting',
     description: 'The API is vulnerable to rate limiting bypass.',
-    location: '/api/v1/users',
-    dateFound: new Date(2023, 4, 10),
-    status: 'closed'
+    severity: 'low',
+    url: '/api/v1/users',
+    date: new Date(2023, 4, 10),
+    status: 'ignored',
+    category: 'API Security',
+    cwe: 'CWE-770',
+    remediation: 'Implement proper rate limiting mechanisms.'
   }
 ];
 
 // Create mock scan results that match the ScanResult interface
-export const mockScanResults = [
+export const mockScanResults: ScanResult[] = [
   {
     id: '1',
     targetId: '1',
     startTime: new Date(2023, 3, 15, 9, 0), 
     endTime: new Date(2023, 3, 15, 10, 30),
     status: 'completed',
-    vulnerabilities: mockVulnerabilities.filter(v => v.targetId === '1'),
+    vulnerabilities: mockVulnerabilities.filter(v => v.id === '1' || v.id === '2'),
     summary: {
       totalUrls: 150,
       scannedUrls: 145,
@@ -268,7 +184,7 @@ export const mockScanResults = [
     startTime: new Date(2023, 4, 2, 14, 0),
     endTime: new Date(2023, 4, 2, 15, 15),
     status: 'completed',
-    vulnerabilities: mockVulnerabilities.filter(v => v.targetId === '2'),
+    vulnerabilities: mockVulnerabilities.filter(v => v.id === '3'),
     summary: {
       totalUrls: 80,
       scannedUrls: 78,
@@ -335,25 +251,25 @@ function generateUUID(): string {
   });
 }
 
-// Modified to not use faker
-export const generateRandomVulnerabilities = (targetId: string, reportId: string, count: number): Vulnerability[] => {
-  const vulnerabilities: Vulnerability[] = [];
-  const severityOptions: ('critical' | 'high' | 'medium' | 'low')[] = ['critical', 'high', 'medium', 'low'];
+// Modified to use the TypedVulnerability interface and not rely on external libraries
+export const generateRandomVulnerabilities = (targetId: string, reportId: string, count: number): TypedVulnerability[] => {
+  const vulnerabilities: TypedVulnerability[] = [];
+  const severityOptions: ('high' | 'medium' | 'low' | 'info')[] = ['high', 'medium', 'low', 'info'];
   const typeOptions: string[] = ['XSS', 'SQL Injection', 'CSRF', 'Broken Authentication', 'API Security'];
-  const statusOptions: ('open' | 'closed' | 'pending review')[] = ['open', 'closed', 'pending review'];
+  const statusOptions: ('open' | 'fixed' | 'ignored')[] = ['open', 'fixed', 'ignored'];
   
   for (let i = 0; i < count; i++) {
     vulnerabilities.push({
       id: generateUUID(),
-      targetId: targetId,
-      reportId: reportId,
       name: `Sample Vulnerability ${i + 1}`,
-      severity: severityOptions[Math.floor(Math.random() * severityOptions.length)],
-      type: typeOptions[Math.floor(Math.random() * typeOptions.length)],
       description: 'This is a sample vulnerability description.',
-      location: `https://example.com/path/${i}`,
-      dateFound: new Date(),
-      status: statusOptions[Math.floor(Math.random() * statusOptions.length)]
+      severity: severityOptions[Math.floor(Math.random() * severityOptions.length)],
+      url: `https://example.com/path/${i}`,
+      date: new Date(),
+      status: statusOptions[Math.floor(Math.random() * statusOptions.length)],
+      category: typeOptions[Math.floor(Math.random() * typeOptions.length)],
+      cwe: `CWE-${100 + i}`,
+      remediation: 'Follow security best practices to address this vulnerability.'
     });
   }
   

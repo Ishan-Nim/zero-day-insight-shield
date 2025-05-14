@@ -7,6 +7,7 @@ import TargetsOverview from "@/components/dashboard/TargetsOverview";
 import VulnerabilitySeverityChart from "@/components/dashboard/VulnerabilitySeverityChart";
 import { mockScanResults, mockTargets } from "@/data/mockData";
 import { useAuth } from "@/context/AuthContext";
+import { ScanResult } from "@/types";
 
 export default function Dashboard() {
   const { currentUser } = useAuth();
