@@ -66,6 +66,7 @@ export default function Layout({ children }: LayoutProps) {
     { name: t('header.scans'), href: '/scans', icon: Shield },
     { name: t('header.reports'), href: '/reports', icon: FileBarChart },
     { name: t('header.analytics'), href: '/analytics', icon: PieChart },
+    { name: t('header.subscription'), href: '/subscription', icon: CreditCard },
   ];
 
   // Only show admin panel in sidebar for users with admin role
@@ -83,11 +84,7 @@ export default function Layout({ children }: LayoutProps) {
         >
           <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
             <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/b5b896a4-caea-4b18-8015-3d39cb5b25a7.png" 
-                alt="CyberCrew Logo" 
-                className="h-8 w-auto mr-2" 
-              />
+              <Shield className="h-6 w-6 text-[#00b3b0] mr-2" />
               <span className="text-xl font-semibold text-sidebar-foreground">CyberCrew</span>
             </div>
             <Button 
@@ -164,11 +161,7 @@ export default function Layout({ children }: LayoutProps) {
               )}
               {!isAuthenticated && (
                 <div className="flex items-center">
-                  <img 
-                    src="/lovable-uploads/b5b896a4-caea-4b18-8015-3d39cb5b25a7.png" 
-                    alt="CyberCrew Logo" 
-                    className="h-6 w-auto mr-2" 
-                  />
+                  <Shield className="h-6 w-6 text-[#00b3b0] mr-2" />
                   <span className="font-semibold text-lg">CyberCrew</span>
                 </div>
               )}

@@ -16,6 +16,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/context/AuthContext";
 import { LanguageProvider } from "@/context/LanguageContext";
+import SubscriptionPage from "@/pages/subscription/SubscriptionPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/subscription" element={<SubscriptionPage />} />
                 <Route
                   path="/dashboard"
                   element={
@@ -63,7 +65,7 @@ function App() {
                 <Route
                   path="/admin"
                   element={
-                    <ProtectedRoute adminOnly>
+                    <ProtectedRoute adminOnly={true}>
                       <AdminPage />
                     </ProtectedRoute>
                   }
