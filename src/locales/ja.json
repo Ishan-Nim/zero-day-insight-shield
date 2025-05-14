@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "サイバークルー",
@@ -24,6 +23,16 @@
     "settings": "設定",
     "logout": "ログアウト",
     "profile": "プロフィール",
+    "subscription": "サブスクリプション"
+  },
+  "sidebar": {
+    "title": "メニュー",
+    "dashboard": "ダッシュボード",
+    "targets": "ターゲット",
+    "scans": "スキャン",
+    "reports": "レポート",
+    "analytics": "分析",
+    "settings": "設定",
     "subscription": "サブスクリプション"
   },
   "targets": {
@@ -111,6 +120,11 @@
     "unlimitedScans": "無制限のスキャンターゲット",
     "unlimitedScansDesc": "すべての資産を制限なくスキャン",
     "orContact": "または直接お問い合わせ：",
-    "contactDescription": "以下のフォームに記入してください。エンタープライズセキュリティニーズについて話し合うためにチームからご連絡します。"
+    "contactDescription": "以下のフォームに記入してください。エンタープライズセキュリティニーズについて話し合うためにチームからご連絡します。",
+    "enterprisePlan": "エンタープライズプラン",
+    "freePlan": "無料プラン",
+    "premiumPlan": "プレミアムプラン",
+    "basicPlan": "ベーシックプラン",
+    "planManagement": "サブスクリプション管理"
   }
 }

@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "CyberCrew",
@@ -24,6 +23,16 @@
     "settings": "Settings",
     "logout": "Logout",
     "profile": "Profile",
+    "subscription": "Subscription"
+  },
+  "sidebar": {
+    "title": "Menu",
+    "dashboard": "Dashboard",
+    "targets": "Targets",
+    "scans": "Scans",
+    "reports": "Reports",
+    "analytics": "Analytics",
+    "settings": "Settings",
     "subscription": "Subscription"
   },
   "targets": {
@@ -111,6 +120,11 @@
     "unlimitedScans": "Unlimited Scan Targets",
     "unlimitedScansDesc": "Scan all of your assets without limitations",
     "orContact": "Or contact us directly:",
-    "contactDescription": "Fill out the form below and our team will contact you to discuss your enterprise security needs."
+    "contactDescription": "Fill out the form below and our team will contact you to discuss your enterprise security needs.",
+    "enterprisePlan": "Enterprise Plan",
+    "freePlan": "Free Plan",
+    "premiumPlan": "Premium Plan",
+    "basicPlan": "Basic Plan",
+    "planManagement": "Manage subscription"
   }
 }

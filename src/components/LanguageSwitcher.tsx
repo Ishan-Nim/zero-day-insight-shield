@@ -23,9 +23,12 @@ export default function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-9 w-9">
+        <Button variant="ghost" size="icon" className="h-9 w-9 relative">
           <Globe className="h-[1.2rem] w-[1.2rem]" />
           <span className="sr-only">Switch language</span>
+          <span className="absolute bottom-0 right-0 text-xs font-bold">
+            {currentLanguage?.code.toUpperCase()}
+          </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

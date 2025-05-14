@@ -61,16 +61,15 @@ export default function Layout({ children }: LayoutProps) {
   };
 
   const navigationItems = [
-    { name: t('header.dashboard'), href: '/', icon: LayoutDashboard },
-    { name: t('header.targets'), href: '/targets', icon: Target },
-    { name: t('header.scans'), href: '/scans', icon: Shield },
-    { name: t('header.reports'), href: '/reports', icon: FileBarChart },
-    { name: t('header.analytics'), href: '/analytics', icon: PieChart },
-    { name: t('header.subscription'), href: '/subscription', icon: CreditCard },
+    { name: t('sidebar.dashboard'), href: '/', icon: LayoutDashboard },
+    { name: t('sidebar.targets'), href: '/targets', icon: Target },
+    { name: t('sidebar.scans'), href: '/scans', icon: Shield },
+    { name: t('sidebar.reports'), href: '/reports', icon: FileBarChart },
+    { name: t('sidebar.analytics'), href: '/analytics', icon: PieChart },
+    { name: t('sidebar.subscription'), href: '/subscription', icon: CreditCard },
   ];
 
   // Only show admin panel in sidebar for users with admin role
-  // Note: It's not shown in the UI for regular users
   const isAdmin = isAuthenticated && currentUser?.role === 'admin';
 
   return (
@@ -85,7 +84,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
             <div className="flex items-center">
               <Shield className="h-6 w-6 text-[#00b3b0] mr-2" />
-              <span className="text-xl font-semibold text-sidebar-foreground">CyberCrew</span>
+              <span className="text-xl font-semibold text-sidebar-foreground">{t('common.appName')}</span>
             </div>
             <Button 
               variant="ghost"
@@ -117,13 +116,13 @@ export default function Layout({ children }: LayoutProps) {
                     className="flex items-center px-3 py-2 text-sidebar-foreground rounded-md hover:bg-sidebar-accent group"
                   >
                     <Settings className="mr-3 h-5 w-5" />
-                    <span>{t('header.settings')}</span>
+                    <span>{t('sidebar.settings')}</span>
                   </Link>
                 </li>
               )}
             </ul>
             <div className="mt-8 px-3">
-              <div className="py-2 text-xs uppercase text-sidebar-foreground/70">Subscription</div>
+              <div className="py-2 text-xs uppercase text-sidebar-foreground/70">{t('sidebar.subscription')}</div>
               <Link 
                 to="/subscription"
                 className="flex items-center px-3 py-2 text-sidebar-foreground rounded-md hover:bg-sidebar-accent group"
@@ -131,10 +130,10 @@ export default function Layout({ children }: LayoutProps) {
                 <CreditCard className="mr-3 h-5 w-5" />
                 <div className="flex flex-col">
                   <span className="font-medium">
-                    {currentUser?.subscription || 'Free'} Plan
+                    {currentUser?.subscription ? t(`subscription.${currentUser.subscription.toLowerCase()}Plan`) : t('subscription.freePlan')}
                   </span>
                   <span className="text-xs text-sidebar-foreground/70">
-                    Manage subscription
+                    {t('subscription.planManagement')}
                   </span>
                 </div>
               </Link>
@@ -162,7 +161,7 @@ export default function Layout({ children }: LayoutProps) {
               {!isAuthenticated && (
                 <div className="flex items-center">
                   <Shield className="h-6 w-6 text-[#00b3b0] mr-2" />
-                  <span className="font-semibold text-lg">CyberCrew</span>
+                  <span className="font-semibold text-lg">{t('common.appName')}</span>
                 </div>
               )}
             </div>
@@ -189,7 +188,9 @@ export default function Layout({ children }: LayoutProps) {
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>
                         {currentUser?.name || currentUser?.email}
-                        <p className="text-xs text-muted-foreground">{currentUser?.subscription} Plan</p>
+                        <p className="text-xs text-muted-foreground">
+                          {currentUser?.subscription ? t(`subscription.${currentUser.subscription.toLowerCase()}Plan`) : t('subscription.freePlan')}
+                        </p>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onSelect={() => navigate("/profile")}>
