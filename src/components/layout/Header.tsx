@@ -23,6 +23,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Menu, Bell, LogOut, UserPlus } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { CcrLogo } from "@/components/CcrLogo";
 
 interface HeaderProps {
   setSidebarOpen: (open: boolean) => void;
@@ -64,7 +65,12 @@ export const Header = ({ setSidebarOpen, isAuthenticated }: HeaderProps) => {
             </Button>
           )}
           
-          {/* Logo removed */}
+          {/* Only show logo in header on mobile */}
+          {isMobile && (
+            <div className="md:hidden">
+              <CcrLogo size="sm" />
+            </div>
+          )}
         </div>
 
         <div className="flex items-center space-x-4">

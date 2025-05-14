@@ -5,6 +5,7 @@ import { SidebarNavigation } from "./SidebarNavigation";
 import { SubscriptionInfo } from "./SubscriptionInfo";
 import { User } from "@/types";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { CcrLogo } from "@/components/CcrLogo";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -29,7 +30,7 @@ export const SidebarComponent = ({
     >
       <div className="flex items-center justify-between px-4 py-3 h-16 bg-sidebar-accent">
         <div className="flex items-center justify-center w-full">
-          {/* Logo removed */}
+          <CcrLogo size="md" />
         </div>
         {isMobile && (
           <Button 
