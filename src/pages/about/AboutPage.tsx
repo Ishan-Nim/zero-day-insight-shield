@@ -24,7 +24,9 @@ export default function AboutPage() {
       
       <div className="container mx-auto py-8 px-4 max-w-5xl">
         <div className="flex flex-col items-center mb-12 text-center">
-          <CcrLogo size="lg" className="mb-6" />
+          <div className="mb-8 w-full max-w-md">
+            <CcrLogo size="lg" />
+          </div>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">{t("about.title")}</h1>
           <p className="text-lg text-muted-foreground max-w-3xl">{t("about.intro")}</p>
         </div>

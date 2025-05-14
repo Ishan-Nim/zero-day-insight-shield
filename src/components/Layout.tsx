@@ -83,9 +83,9 @@ export default function Layout({ children }: LayoutProps) {
             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } md:translate-x-0 md:static md:inset-auto flex flex-col`}
         >
-          <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
-            <div className="flex items-center">
-              <CcrLogo />
+          <div className="flex items-center justify-between px-4 py-3 h-20 bg-sidebar-accent">
+            <div className="flex items-center flex-1 justify-center">
+              <CcrLogo size="md" />
             </div>
             <Button 
               variant="ghost"
