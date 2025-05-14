@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {
   Shield,
   PieChart,
@@ -40,6 +42,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const { currentUser, logout, isAuthenticated } = useAuth();
+  const { t } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
   
@@ -58,11 +61,11 @@ export default function Layout({ children }: LayoutProps) {
   };
 
   const navigationItems = [
-    { name: 'Dashboard', href: '/', icon: LayoutDashboard },
-    { name: 'Targets', href: '/targets', icon: Target },
-    { name: 'Scans', href: '/scans', icon: Shield },
-    { name: 'Reports', href: '/reports', icon: FileBarChart },
-    { name: 'Analytics', href: '/analytics', icon: PieChart },
+    { name: t('header.dashboard'), href: '/', icon: LayoutDashboard },
+    { name: t('header.targets'), href: '/targets', icon: Target },
+    { name: t('header.scans'), href: '/scans', icon: Shield },
+    { name: t('header.reports'), href: '/reports', icon: FileBarChart },
+    { name: t('header.analytics'), href: '/analytics', icon: PieChart },
   ];
 
   // Only show admin panel in sidebar for users with admin role
@@ -80,8 +83,12 @@ export default function Layout({ children }: LayoutProps) {
         >
           <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
             <div className="flex items-center">
-              <Shield className="h-8 w-8 text-primary" />
-              <span className="ml-2 text-xl font-semibold text-sidebar-foreground">ZeroDay</span>
+              <img 
+                src="/lovable-uploads/f78a1255-90fc-4bf6-a3ef-839e93cd4305.png" 
+                alt="CyberCrew Logo" 
+                className="h-8 w-auto mr-2" 
+              />
+              <span className="text-xl font-semibold text-sidebar-foreground">{t('common.appName')}</span>
             </div>
             <Button 
               variant="ghost"
@@ -113,7 +120,7 @@ export default function Layout({ children }: LayoutProps) {
                     className="flex items-center px-3 py-2 text-sidebar-foreground rounded-md hover:bg-sidebar-accent group"
                   >
                     <Settings className="mr-3 h-5 w-5" />
-                    <span>Admin Panel</span>
+                    <span>{t('header.settings')}</span>
                   </Link>
                 </li>
               )}
@@ -157,13 +164,19 @@ export default function Layout({ children }: LayoutProps) {
               )}
               {!isAuthenticated && (
                 <div className="flex items-center">
-                  <Shield className="h-6 w-6 text-primary mr-2" />
-                  <span className="font-semibold text-lg">ZeroDay Scanner</span>
+                  <img 
+                    src="/lovable-uploads/f78a1255-90fc-4bf6-a3ef-839e93cd4305.png" 
+                    alt="CyberCrew Logo" 
+                    className="h-6 w-auto mr-2" 
+                  />
+                  <span className="font-semibold text-lg">{t('common.appName')}</span>
                 </div>
               )}
             </div>
 
             <div className="flex items-center space-x-4">
+              <LanguageSwitcher />
+              
               {isAuthenticated ? (
                 <>
                   <Button variant="ghost" size="icon" className="relative">
@@ -187,15 +200,15 @@ export default function Layout({ children }: LayoutProps) {
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onSelect={() => navigate("/profile")}>
-                        Profile
+                        {t('header.profile')}
                       </DropdownMenuItem>
                       <DropdownMenuItem onSelect={() => navigate("/settings")}>
-                        Settings
+                        {t('header.settings')}
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onSelect={handleLogout} className="text-destructive">
                         <LogOut className="w-4 h-4 mr-2" />
-                        Logout
+                        {t('header.logout')}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
