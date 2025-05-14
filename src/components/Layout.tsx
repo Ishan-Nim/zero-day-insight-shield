@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
@@ -22,6 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { CcrLogo } from "@/components/CcrLogo";
 import {
   Shield,
   PieChart,
@@ -33,7 +33,8 @@ import {
   LogOut,
   Menu,
   UserPlus,
-  CreditCard
+  CreditCard,
+  Info
 } from "lucide-react";
 
 interface LayoutProps {
@@ -67,6 +68,7 @@ export default function Layout({ children }: LayoutProps) {
     { name: t('sidebar.reports'), href: '/reports', icon: FileBarChart },
     { name: t('sidebar.analytics'), href: '/analytics', icon: PieChart },
     { name: t('sidebar.subscription'), href: '/subscription', icon: CreditCard },
+    { name: t('sidebar.about'), href: '/about', icon: Info },
   ];
 
   // Only show admin panel in sidebar for users with admin role
@@ -83,8 +85,7 @@ export default function Layout({ children }: LayoutProps) {
         >
           <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
             <div className="flex items-center">
-              <Shield className="h-6 w-6 text-[#00b3b0] mr-2" />
-              <span className="text-xl font-semibold text-sidebar-foreground">{t('common.appName')}</span>
+              <CcrLogo />
             </div>
             <Button 
               variant="ghost"
@@ -160,16 +161,21 @@ export default function Layout({ children }: LayoutProps) {
               )}
               {!isAuthenticated && (
                 <div className="flex items-center">
-                  <Shield className="h-6 w-6 text-[#00b3b0] mr-2" />
-                  <span className="font-semibold text-lg">{t('common.appName')}</span>
+                  <CcrLogo />
                 </div>
               )}
             </div>
 
             <div className="flex items-center space-x-4">
+              {!isAuthenticated && (
+                <Link to="/about" className="text-sm font-medium hover:text-primary">
+                  {t('header.about')}
+                </Link>
+              )}
               <LanguageSwitcher />
               
               {isAuthenticated ? (
+                // ... keep existing code (authenticated user controls)
                 <>
                   <Button variant="ghost" size="icon" className="relative">
                     <Bell className="h-5 w-5" />

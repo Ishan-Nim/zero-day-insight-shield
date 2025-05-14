@@ -12,6 +12,7 @@ import Login from "@/pages/Login";
 import Signup from "@/pages/Signup";
 import NotFound from "@/pages/NotFound";
 import Index from "@/pages/Index";
+import AboutPage from "@/pages/about/AboutPage";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/context/AuthContext";
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/subscription" element={<SubscriptionPage />} />
+                <Route path="/about" element={<AboutPage />} />
                 <Route
                   path="/dashboard"
                   element={

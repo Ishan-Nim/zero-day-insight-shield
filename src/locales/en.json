@@ -1,3 +1,4 @@
+
 {
   "common": {
     "appName": "CyberCrew",
@@ -23,7 +24,8 @@
     "settings": "Settings",
     "logout": "Logout",
     "profile": "Profile",
-    "subscription": "Subscription"
+    "subscription": "Subscription",
+    "about": "About"
   },
   "sidebar": {
     "title": "Menu",
@@ -33,7 +35,8 @@
     "reports": "Reports",
     "analytics": "Analytics",
     "settings": "Settings",
-    "subscription": "Subscription"
+    "subscription": "Subscription",
+    "about": "About"
   },
   "targets": {
     "title": "Target Management",
@@ -126,5 +129,33 @@
     "premiumPlan": "Premium Plan",
     "basicPlan": "Basic Plan",
     "planManagement": "Manage subscription"
+  },
+  "about": {
+    "pageTitle": "About",
+    "title": "Introducing the CyberCrew Web Vulnerability Scanner",
+    "intro": "At CyberCrew, we believe that awareness begins with experience — and true cybersecurity starts with visibility.",
+    "description": "Our Web Vulnerability Scanner is a powerful platform designed to help organizations discover, understand, and respond to security risks within their web applications and APIs. Built with usability and clarity in mind, it offers a streamlined dashboard where both technical teams and decision-makers can monitor security status at a glance.",
+    "keyFeatures": "Key Features",
+    "featureDashboardTitle": "Real-Time Dashboard",
+    "featureDashboard1": "Track active, completed, pending, and failed scans.",
+    "featureDashboard2": "View vulnerability counts by severity: High, Medium, Low, and Informational.",
+    "featureDashboard3": "Analyze risk distribution with clear visualizations.",
+    "featureTargetTitle": "Target Management",
+    "featureTarget1": "Register and manage multiple scan targets (e.g., websites, APIs).",
+    "featureTarget2": "Launch scans manually or on a schedule.",
+    "featureTarget3": "View scan history and status for each target.",
+    "featureAlertsTitle": "Actionable Alerts",
+    "featureAlerts1": "Instantly see where critical vulnerabilities exist.",
+    "featureAlerts2": "Receive email alerts after scans are completed.",
+    "featureAlerts3": "Reports are sent directly to your inbox for secure handling.",
+    "featureMultilingualTitle": "Multilingual Interface",
+    "featureMultilingual": "Switch seamlessly between English, Japanese, and Sinhala for global usability.",
+    "securityTitle": "Built with Security in Mind",
+    "security1": "We don't just simulate attacks—we show you the real risks.",
+    "security2": "Our team performs manual scan execution, ensuring deeper accuracy than fully automated tools.",
+    "security3": "Sensitive data is never exposed in the dashboard. All detailed results are securely sent via email to protect your environment and your privacy.",
+    "teamTitle": "Designed for Teams Who Take Security Seriously",
+    "teamDescription": "Whether you manage a single website or an entire enterprise network, CyberCrew equips you with the insight and control to secure your assets—before attackers can exploit them.",
+    "quote": "Let the experience of being attacked become your strongest defense."
   }
 }
