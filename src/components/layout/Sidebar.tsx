@@ -4,7 +4,7 @@ import { Menu } from "lucide-react";
 import { CcrLogo } from "@/components/CcrLogo";
 import { SidebarNavigation } from "./SidebarNavigation";
 import { SubscriptionInfo } from "./SubscriptionInfo";
-import { User } from "@/types"; // Updated import path to use the local User type
+import { User } from "@/types"; // This is the correct import path
 
 interface SidebarProps {
   sidebarOpen: boolean;

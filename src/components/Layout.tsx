@@ -15,6 +15,17 @@ export default function Layout({ children }: LayoutProps) {
   // Only show admin panel in sidebar for users with admin role
   const isAdmin = isAuthenticated && currentUser?.role === 'admin';
 
+  // Don't render layout components if not authenticated (for login/signup pages)
+  const isAuthPage = !isAuthenticated && (window.location.pathname === '/login' || window.location.pathname === '/signup');
+
+  if (isAuthPage) {
+    return <div className="w-full h-screen bg-background">
+      <main className="w-full h-full">
+        {children}
+      </main>
+    </div>;
+  }
+
   return (
     <div className="flex h-screen w-full bg-background">
       {/* Sidebar for authenticated users */}
@@ -30,10 +41,12 @@ export default function Layout({ children }: LayoutProps) {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden w-full">
         {/* Navbar */}
-        <Header 
-          setSidebarOpen={setSidebarOpen} 
-          isAuthenticated={isAuthenticated} 
-        />
+        {isAuthenticated && (
+          <Header 
+            setSidebarOpen={setSidebarOpen} 
+            isAuthenticated={isAuthenticated} 
+          />
+        )}
 
         {/* Page content */}
         <main className="flex-1 overflow-auto bg-background w-full">

@@ -2,16 +2,17 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import Dashboard from "./Dashboard";
-import Login from "./Login";
 
 const Index = () => {
   const { isAuthenticated } = useAuth();
   
-  if (isAuthenticated) {
-    return <Dashboard />;
-  } else {
+  // Always redirect to login if not authenticated
+  if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
+  
+  // Show dashboard if authenticated
+  return <Dashboard />;
 };
 
 export default Index;
