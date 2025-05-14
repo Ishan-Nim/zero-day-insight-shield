@@ -12,11 +12,8 @@ import { ScanResult } from "@/types";
 export default function Dashboard() {
   const { currentUser } = useAuth();
 
-  // Type-safe scan results
-  const typedScanResults: ScanResult[] = mockScanResults;
-
   // Get the latest completed scan results
-  const completedScans = typedScanResults.filter(scan => scan.status === "completed");
+  const completedScans = mockScanResults.filter(scan => scan.status === "completed");
   const latestScan = completedScans.sort((a, b) => 
     (b.endTime?.getTime() || 0) - (a.endTime?.getTime() || 0)
   )[0];
@@ -29,9 +26,9 @@ export default function Dashboard() {
     latestScan.summary.infoSeverity : 0;
 
   // Count scans by status
-  const inProgressScans = typedScanResults.filter(scan => scan.status === "in_progress").length;
+  const inProgressScans = mockScanResults.filter(scan => scan.status === "in_progress").length;
   const completedScansCount = completedScans.length;
-  const failedScans = typedScanResults.filter(scan => scan.status === "failed").length;
+  const failedScans = mockScanResults.filter(scan => scan.status === "failed").length;
 
   return (
     <div className="p-6">
@@ -57,7 +54,7 @@ export default function Dashboard() {
         />
         <ScanStatusCard
           title="Pending Scans"
-          count={typedScanResults.filter(scan => scan.status === "queued").length}
+          count={mockScanResults.filter(scan => scan.status === "queued").length}
           icon={<Clock className="h-5 w-5 text-white" />}
           color="bg-amber-500"
         />
@@ -105,7 +102,7 @@ export default function Dashboard() {
       </div>
 
       <div className="mt-6">
-        <RecentScans scans={typedScanResults} />
+        <RecentScans scans={mockScanResults} />
       </div>
     </div>
   );
