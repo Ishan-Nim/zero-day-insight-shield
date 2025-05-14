@@ -44,6 +44,70 @@ export interface Report {
 // Import Vulnerability type from the types file
 import { Vulnerability as TypedVulnerability, ScanResult } from "@/types";
 
+// Add the missing mockTargets export
+export const mockTargets: ScanTarget[] = [
+  {
+    id: '1',
+    name: 'Corporate Website',
+    url: 'https://example.com',
+    description: 'Main corporate website',
+    customerId: '2',
+    verified: true,
+    status: 'active',
+    lastScan: new Date(2023, 1, 1),
+    owner: 'user-123',
+    createdAt: new Date(2022, 9, 15)
+  },
+  {
+    id: '2',
+    name: 'Customer Portal',
+    url: 'https://customer.example.com',
+    description: 'Website for customers to manage their accounts',
+    customerId: '2',
+    verified: false,
+    status: 'active',
+    lastScan: new Date(2023, 2, 15),
+    owner: 'user-123',
+    createdAt: new Date(2022, 10, 5)
+  },
+  {
+    id: '3',
+    name: 'API Gateway',
+    url: 'https://api.example.com',
+    description: 'API gateway for mobile app',
+    customerId: '2',
+    verified: true,
+    status: 'scanning',
+    lastScan: new Date(2023, 3, 1),
+    owner: 'user-123',
+    createdAt: new Date(2022, 11, 10)
+  },
+  {
+    id: '4',
+    name: 'Marketing Website',
+    url: 'https://marketing.example.com',
+    description: 'Marketing website for the company',
+    customerId: '2',
+    verified: false,
+    status: 'inactive',
+    lastScan: new Date(2022, 12, 1),
+    owner: 'user-123',
+    createdAt: new Date(2022, 8, 20)
+  },
+  {
+    id: '5',
+    name: 'Internal Dashboard',
+    url: 'https://dashboard.example.com',
+    description: 'Internal dashboard for employees',
+    customerId: '2',
+    verified: true,
+    status: 'active',
+    lastScan: new Date(2023, 4, 1),
+    owner: 'user-123',
+    createdAt: new Date(2022, 7, 30)
+  }
+];
+
 // Updated mockVulnerabilities to match the Vulnerability type from types/index.ts
 export const mockVulnerabilities: TypedVulnerability[] = [
   {
