@@ -15,32 +15,40 @@ export const CcrLogo = ({ size = "md", className }: CcrLogoProps) => {
 
   return (
     <div className={cn("flex items-center", className)}>
-      <div className="bg-primary p-1 rounded flex items-center justify-center">
-        <div className={cn("flex items-center justify-center", sizeClasses[size])}>
-          <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            {/* Tiffany Blue Background */}
-            <rect width="300" height="80" rx="8" fill="#00b3b0" />
-            
-            {/* Logo Text */}
-            <text 
-              x="150" 
-              y="48" 
-              fontSize="28" 
-              fontFamily="Arial, sans-serif" 
-              fontWeight="bold" 
-              fill="white" 
-              textAnchor="middle">
-              CYBER CREW
-            </text>
-            
-            {/* Scanner Icon - Simple wave pattern */}
-            <g transform="translate(255, 40)">
-              <path d="M-5,0 C0,-10 5,10 10,0" stroke="white" strokeWidth="3" fill="none" />
-              <path d="M-10,0 C-2,-15 7,15 15,0" stroke="white" strokeWidth="2" fill="none" />
-              <path d="M-15,0 C-5,-20 10,20 20,0" stroke="white" strokeWidth="1.5" fill="none" />
-            </g>
-          </svg>
-        </div>
+      <div className={cn("flex items-center justify-center", sizeClasses[size])}>
+        <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+          {/* Shield logo */}
+          <g transform="translate(10, 30) scale(0.8)">
+            <path 
+              d="M50,0 C80,20 120,20 150,0 L150,80 C120,120 80,120 50,80 Z" 
+              fill="#00b3b0" 
+              stroke="#00b3b0" 
+              strokeWidth="8"
+            />
+            <path 
+              d="M70,40 L100,70 L130,40" 
+              fill="none" 
+              stroke="white" 
+              strokeWidth="8" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            />
+            <circle cx="130" cy="30" r="10" fill="white" />
+          </g>
+          
+          {/* CYBER CREW Text */}
+          <text 
+            x="200" 
+            y="110" 
+            fontSize="80" 
+            fontFamily="Arial, sans-serif" 
+            fontWeight="bold" 
+            letterSpacing="2" 
+            fill="#00b3b0" 
+            style={{ textTransform: 'uppercase' }}>
+            CYBER CREW
+          </text>
+        </svg>
       </div>
     </div>
   );
