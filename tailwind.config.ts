@@ -58,9 +58,16 @@ export default {
           foreground: "hsl(var(--sidebar-foreground))",
           accent: "hsl(var(--sidebar-accent))",
         },
-        teal: {
-          400: "hsl(var(--tiffany-blue))",
-        }
+        tiffany: {
+          DEFAULT: "hsl(var(--tiffany-blue))",
+          light: "hsl(var(--tiffany-blue-light))",
+          dark: "hsl(var(--tiffany-blue-dark))",
+        },
+        darkblue: {
+          DEFAULT: "hsl(var(--dark-blue))",
+          light: "hsl(var(--dark-blue-light))",
+          dark: "hsl(var(--dark-blue-dark))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

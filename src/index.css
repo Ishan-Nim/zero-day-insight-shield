@@ -11,8 +11,11 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    
+    /* Changed primary to tiffany blue */
+    --primary: 171 72% 49%;
     --primary-foreground: 0 0% 98%;
+    
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
@@ -23,12 +26,23 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    --ring: 171 72% 49%;
     --radius: 0.5rem;
-    --sidebar: 240 10% 3.9%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-accent: 240 5% 7%;
+    
+    /* Sidebar colors for light mode */
+    --sidebar: 171 72% 90%;
+    --sidebar-foreground: 240 10% 3.9%;
+    --sidebar-accent: 171 72% 85%;
+    
+    /* Tiffany Blue Colors */
     --tiffany-blue: 171 72% 49%;
+    --tiffany-blue-light: 171 72% 85%;
+    --tiffany-blue-dark: 171 72% 30%;
+    
+    /* Dark Blue Colors */
+    --dark-blue: 220 70% 20%;
+    --dark-blue-light: 220 70% 40%;
+    --dark-blue-dark: 220 70% 15%;
   }
  
   .dark {
@@ -38,8 +52,11 @@
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    
+    /* Keeping tiffany blue as primary even in dark mode */
+    --primary: 171 72% 49%;
     --primary-foreground: 240 5.9% 10%;
+    
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
@@ -50,11 +67,22 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --sidebar: 240 10% 3.9%;
+    --ring: 171 72% 49%;
+    
+    /* Sidebar colors for dark mode using dark blue */
+    --sidebar: 220 70% 20%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-accent: 240 5% 14%;
+    --sidebar-accent: 220 70% 25%;
+    
+    /* Tiffany Blue Colors remain the same */
     --tiffany-blue: 171 72% 49%;
+    --tiffany-blue-light: 171 72% 65%;
+    --tiffany-blue-dark: 171 72% 30%;
+    
+    /* Dark Blue Colors remain the same */
+    --dark-blue: 220 70% 20%;
+    --dark-blue-light: 220 70% 30%;
+    --dark-blue-dark: 220 70% 15%;
   }
 }
  
