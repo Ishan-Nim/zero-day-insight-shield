@@ -20,9 +20,15 @@ import TargetsPage from "./pages/targets/TargetsPage";
 import ReportsPage from "./pages/reports/ReportsPage";
 import AnalyticsPage from "./pages/analytics/AnalyticsPage";
 import AdminScanQueuePage from "./pages/admin/AdminScanQueuePage";
+import ScansPage from "./pages/scans/ScansPage";
+import AboutPage from "./pages/about/AboutPage";
+import SubscriptionPage from "./pages/subscription/SubscriptionPage";
 
 // Create a QueryClient instance
 const queryClient = new QueryClient();
+
+// Create a window.React for libraries that rely on it being globally available
+window.React = React;
 
 const App = () => {
   return (
@@ -55,6 +61,14 @@ const App = () => {
                       </Layout>
                     } />
 
+                    <Route path="/scans" element={
+                      <Layout>
+                        <ProtectedRoute>
+                          <ScansPage />
+                        </ProtectedRoute>
+                      </Layout>
+                    } />
+
                     <Route path="/reports" element={
                       <Layout>
                         <ProtectedRoute>
@@ -67,6 +81,20 @@ const App = () => {
                       <Layout>
                         <ProtectedRoute>
                           <AnalyticsPage />
+                        </ProtectedRoute>
+                      </Layout>
+                    } />
+
+                    <Route path="/about" element={
+                      <Layout>
+                        <AboutPage />
+                      </Layout>
+                    } />
+
+                    <Route path="/subscription" element={
+                      <Layout>
+                        <ProtectedRoute>
+                          <SubscriptionPage />
                         </ProtectedRoute>
                       </Layout>
                     } />

@@ -31,7 +31,9 @@ import {
   LogOut,
   Menu,
   UserPlus,
-  CreditCard
+  CreditCard,
+  Activity,
+  Info
 } from "lucide-react";
 import LanguageSwitcher from "./ui/LanguageSwitcher";
 import { useLanguage } from "@/i18n";
@@ -64,8 +66,11 @@ export default function Layout({ children }: LayoutProps) {
   const navigationItems = [
     { name: t('header.dashboard'), href: '/', icon: LayoutDashboard },
     { name: t('header.targets'), href: '/targets', icon: Target },
+    { name: t('header.scans'), href: '/scans', icon: Activity },
     { name: t('header.reports'), href: '/reports', icon: FileBarChart },
     { name: t('header.analytics'), href: '/analytics', icon: PieChart },
+    { name: t('header.about'), href: '/about', icon: Info },
+    { name: t('header.subscription'), href: '/subscription', icon: CreditCard },
   ];
 
   // Only show admin panel in sidebar for users with admin role
@@ -83,7 +88,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
             <div className="flex items-center">
               <Shield className="h-8 w-8 text-primary" />
-              <span className="ml-2 text-xl font-semibold text-sidebar-foreground">ZeroDay</span>
+              <span className="ml-2 text-xl font-semibold text-sidebar-foreground">Cyber Crew</span>
             </div>
             <Button 
               variant="ghost"
@@ -160,7 +165,7 @@ export default function Layout({ children }: LayoutProps) {
               {!isAuthenticated && (
                 <div className="flex items-center">
                   <Shield className="h-6 w-6 text-primary mr-2" />
-                  <span className="font-semibold text-lg">{t('header.title')}</span>
+                  <span className="font-semibold text-lg">Cyber Crew Scanner</span>
                 </div>
               )}
             </div>

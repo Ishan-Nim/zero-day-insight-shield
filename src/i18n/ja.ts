@@ -12,7 +12,7 @@ export default {
     next: "次へ",
   },
   header: {
-    title: "ゼロデイスキャナー",
+    title: "サイバークルースキャナー",
     dashboard: "ダッシュボード",
     targets: "ターゲット",
     reports: "レポート",
@@ -20,6 +20,9 @@ export default {
     settings: "設定",
     profile: "プロフィール",
     logout: "ログアウト",
+    scans: "スキャン",
+    about: "会社概要",
+    subscription: "サブスクリプション",
   },
   auth: {
     login: "ログイン",
@@ -32,7 +35,7 @@ export default {
   },
   targets: {
     title: "ターゲット管理",
-    addTarget: "ターゲットを追加",
+    addTarget: "新しいターゲットを追加",
     noTargets: "ターゲットが見つかりません",
     noTargetsDesc: "スキャンを開始するには最初のターゲットを追加してください",
     searchTargets: "ターゲットを検索...",
@@ -76,5 +79,89 @@ export default {
     uploadReport: "レポートをアップロード",
     sendReport: "レポートを送信",
     targetInfo: "ターゲット情報",
+  },
+  scans: {
+    activeScan: "アクティブなスキャン",
+    completedScan: "完了したスキャン",
+    pendingScan: "保留中のスキャン",
+    failedScan: "失敗したスキャン",
+    target: "ターゲット",
+    startTime: "開始時間",
+    status: "状態",
+    progress: "進捗",
+    phase: "現在のフェーズ",
+    duration: "期間",
+    findings: "発見事項",
+    high: "高",
+    medium: "中", 
+    low: "低",
+    info: "情報",
+    running: "実行中",
+    pending: "保留中",
+    failed: "失敗",
+    completed: "完了",
+    noActiveScan: "アクティブなスキャンはありません",
+    noCompletedScan: "完了したスキャンはありません",
+    viewDetails: "詳細を表示",
+    cancelScan: "スキャンをキャンセル",
+  },
+  subscription: {
+    title: "プランを選択",
+    monthlyBilling: "月額請求",
+    yearlyBilling: "年間請求（20％割引）",
+    freePlan: "無料",
+    basicPlan: "ベーシック",
+    proPlan: "プロフェッショナル",
+    enterprisePlan: "エンタープライズ",
+    currentPlan: "現在のプラン",
+    upgrade: "アップグレード",
+    downgrade: "ダウングレード",
+    contact: "営業に問い合わせ",
+    perMonth: "/月",
+    perYear: "/年",
+    features: "機能",
+    targetsIncluded: "含まれるターゲット",
+    scansPerMonth: "月あたりのスキャン",
+    supportResponse: "サポート応答時間",
+    apiAccess: "APIアクセス",
+    advancedReporting: "高度なレポート",
+    scheduledScans: "スケジュールされたスキャン",
+    customScans: "カスタムスキャンプロファイル",
+    dedicated: "専任サポート",
+    unlimited: "無制限",
+    hours: "時間",
+    days: "日",
+  },
+  about: {
+    title: "サイバークルーについて",
+    subtitle: "Webの脆弱性スキャナー",
+    intro: "サイバークルーでは、意識は経験から始まり、真のサイバーセキュリティは可視性から始まると信じています。",
+    description: "当社のWeb脆弱性スキャナーは、組織がWebアプリケーションとAPIのセキュリティリスクを発見、理解、対応するのを支援する強力なプラットフォームです。使いやすさと明確さを念頭に置いて構築されており、技術チームと意思決定者の両方がセキュリティ状態を一目で監視できる合理化されたダッシュボードを提供します。",
+    featuresTitle: "主な特徴",
+    features: {
+      dashboard: {
+        title: "リアルタイムダッシュボード",
+        description: "アクティブ、完了、保留中、失敗したスキャンを追跡します。重要度別の脆弱性数をハイ、ミディアム、ロー、情報として表示します。明確な視覚化でリスク分布を分析します。"
+      },
+      targets: {
+        title: "ターゲット管理",
+        description: "複数のスキャンターゲット（例：ウェブサイト、API）を登録および管理します。手動またはスケジュールでスキャンを開始します。各ターゲットのスキャン履歴とステータスを表示します。"
+      },
+      alerts: {
+        title: "実用的なアラート",
+        description: "重大な脆弱性がどこに存在するかを即座に確認できます。スキャン完了後にメールアラートを受け取ります。レポートは安全な処理のためにあなたの受信トレイに直接送信されます。"
+      },
+      multilingual: {
+        title: "多言語インターフェース",
+        description: "グローバルな使いやすさのために、英語、日本語、シンハラ語をシームレスに切り替えることができます。"
+      },
+      security: {
+        title: "セキュリティを念頭に設計",
+        description: "私たちは単に攻撃をシミュレートするだけでなく、実際のリスクを示します。当社のチームは手動でスキャン実行を行い、完全に自動化されたツールよりも深い精度を確保します。機密データはダッシュボードに公開されることはありません。すべての詳細な結果は、環境とプライバシーを保護するために電子メールで安全に送信されます。"
+      }
+    },
+    conclusion: "セキュリティを真剣に考えるチーム向けに設計",
+    conclusionText: "単一のウェブサイトを管理する場合でも、企業全体のネットワークを管理する場合でも、サイバークルーは攻撃者が悪用する前に資産を安全に保つための洞察と制御を提供します。",
+    tagline: "攻撃される経験をあなたの最強の防御にしましょう。"
   }
 };

@@ -12,7 +12,7 @@ export default {
     next: "Next",
   },
   header: {
-    title: "ZeroDay Scanner",
+    title: "Cyber Crew Scanner",
     dashboard: "Dashboard",
     targets: "Targets",
     reports: "Reports",
@@ -20,6 +20,9 @@ export default {
     settings: "Settings",
     profile: "Profile",
     logout: "Logout",
+    scans: "Scans",
+    about: "About Us",
+    subscription: "Subscription",
   },
   auth: {
     login: "Login",
@@ -32,7 +35,7 @@ export default {
   },
   targets: {
     title: "Target Management",
-    addTarget: "Add Target",
+    addTarget: "Add New Target",
     noTargets: "No targets found",
     noTargetsDesc: "Add your first target to begin scanning",
     searchTargets: "Search targets...",
@@ -76,5 +79,89 @@ export default {
     uploadReport: "Upload Report",
     sendReport: "Send Report",
     targetInfo: "Target Information",
+  },
+  scans: {
+    activeScan: "Active Scans",
+    completedScan: "Completed Scans",
+    pendingScan: "Pending Scans",
+    failedScan: "Failed Scans",
+    target: "Target",
+    startTime: "Started",
+    status: "Status",
+    progress: "Progress",
+    phase: "Current Phase",
+    duration: "Duration",
+    findings: "Findings",
+    high: "High",
+    medium: "Medium", 
+    low: "Low",
+    info: "Info",
+    running: "Running",
+    pending: "Pending",
+    failed: "Failed",
+    completed: "Completed",
+    noActiveScan: "No active scans",
+    noCompletedScan: "No completed scans",
+    viewDetails: "View Details",
+    cancelScan: "Cancel Scan",
+  },
+  subscription: {
+    title: "Choose Your Plan",
+    monthlyBilling: "Monthly Billing",
+    yearlyBilling: "Yearly Billing (Save 20%)",
+    freePlan: "Free",
+    basicPlan: "Basic",
+    proPlan: "Professional",
+    enterprisePlan: "Enterprise",
+    currentPlan: "Current Plan",
+    upgrade: "Upgrade",
+    downgrade: "Downgrade",
+    contact: "Contact Sales",
+    perMonth: "/month",
+    perYear: "/year",
+    features: "Features",
+    targetsIncluded: "Targets included",
+    scansPerMonth: "Scans per month",
+    supportResponse: "Support response time",
+    apiAccess: "API Access",
+    advancedReporting: "Advanced reporting",
+    scheduledScans: "Scheduled scans",
+    customScans: "Custom scan profiles",
+    dedicated: "Dedicated support",
+    unlimited: "Unlimited",
+    hours: "hours",
+    days: "days",
+  },
+  about: {
+    title: "About Cyber Crew",
+    subtitle: "Web Vulnerability Scanner",
+    intro: "At CyberCrew, we believe that awareness begins with experience — and true cybersecurity starts with visibility.",
+    description: "Our Web Vulnerability Scanner is a powerful platform designed to help organizations discover, understand, and respond to security risks within their web applications and APIs. Built with usability and clarity in mind, it offers a streamlined dashboard where both technical teams and decision-makers can monitor security status at a glance.",
+    featuresTitle: "Key Features",
+    features: {
+      dashboard: {
+        title: "Real-Time Dashboard",
+        description: "Track active, completed, pending, and failed scans. View vulnerability counts by severity: High, Medium, Low, and Informational. Analyze risk distribution with clear visualizations."
+      },
+      targets: {
+        title: "Target Management",
+        description: "Register and manage multiple scan targets (e.g., websites, APIs). Launch scans manually or on a schedule. View scan history and status for each target."
+      },
+      alerts: {
+        title: "Actionable Alerts",
+        description: "Instantly see where critical vulnerabilities exist. Receive email alerts after scans are completed. Reports are sent directly to your inbox for secure handling."
+      },
+      multilingual: {
+        title: "Multilingual Interface",
+        description: "Switch seamlessly between English, Japanese, and Sinhala for global usability."
+      },
+      security: {
+        title: "Built with Security in Mind",
+        description: "We don't just simulate attacks—we show you the real risks. Our team performs manual scan execution, ensuring deeper accuracy than fully automated tools. Sensitive data is never exposed in the dashboard. All detailed results are securely sent via email to protect your environment and your privacy."
+      }
+    },
+    conclusion: "Designed for Teams Who Take Security Seriously",
+    conclusionText: "Whether you manage a single website or an entire enterprise network, CyberCrew equips you with the insight and control to secure your assets—before attackers can exploit them.",
+    tagline: "Let the experience of being attacked become your strongest defense."
   }
 };
