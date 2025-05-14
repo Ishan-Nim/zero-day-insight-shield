@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
@@ -82,8 +83,12 @@ export default function Layout({ children }: LayoutProps) {
         >
           <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
             <div className="flex items-center">
-              <Shield className="h-6 w-6 text-primary mr-2" />
-              <span className="text-xl font-semibold text-sidebar-foreground">ZeroDay</span>
+              <img 
+                src="/lovable-uploads/b5b896a4-caea-4b18-8015-3d39cb5b25a7.png" 
+                alt="CyberCrew Logo" 
+                className="h-8 w-auto mr-2" 
+              />
+              <span className="text-xl font-semibold text-sidebar-foreground">CyberCrew</span>
             </div>
             <Button 
               variant="ghost"
@@ -159,8 +164,12 @@ export default function Layout({ children }: LayoutProps) {
               )}
               {!isAuthenticated && (
                 <div className="flex items-center">
-                  <Shield className="h-6 w-6 text-primary mr-2" />
-                  <span className="font-semibold text-lg">ZeroDay</span>
+                  <img 
+                    src="/lovable-uploads/b5b896a4-caea-4b18-8015-3d39cb5b25a7.png" 
+                    alt="CyberCrew Logo" 
+                    className="h-6 w-auto mr-2" 
+                  />
+                  <span className="font-semibold text-lg">CyberCrew</span>
                 </div>
               )}
             </div>
