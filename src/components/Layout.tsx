@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -87,8 +86,8 @@ export default function Layout({ children }: LayoutProps) {
         >
           <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
             <div className="flex items-center">
-              <Shield className="h-8 w-8 text-primary" />
-              <span className="ml-2 text-xl font-semibold text-sidebar-foreground">Cyber Crew</span>
+              <Shield className="h-8 w-8 text-tiffanyBlue" />
+              <span className="ml-2 text-xl font-semibold text-sidebar-foreground">Cyber Crew Scanner</span>
             </div>
             <Button 
               variant="ghost"
@@ -164,7 +163,7 @@ export default function Layout({ children }: LayoutProps) {
               )}
               {!isAuthenticated && (
                 <div className="flex items-center">
-                  <Shield className="h-6 w-6 text-primary mr-2" />
+                  <Shield className="h-6 w-6 text-tiffanyBlue mr-2" />
                   <span className="font-semibold text-lg">Cyber Crew Scanner</span>
                 </div>
               )}

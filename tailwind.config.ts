@@ -68,7 +68,8 @@ export default {
 					medium: '#f59e0b',
 					low: '#65a30d',
 					info: '#0ea5e9'
-				}
+				},
+				tiffanyBlue: '#0ABAB5'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
