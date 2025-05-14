@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { CcrLogo } from "@/components/CcrLogo";
 import { Menu, Bell, LogOut, UserPlus } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -51,8 +50,8 @@ export const Header = ({ setSidebarOpen, isAuthenticated }: HeaderProps) => {
   };
 
   return (
-    <header className="bg-white dark:bg-background shadow-sm border-b w-full">
-      <div className="flex items-center justify-between h-16 px-4 w-full max-w-full">
+    <header className="bg-white dark:bg-background border-b w-full">
+      <div className="flex items-center justify-between h-16 px-4 w-full">
         <div className="flex items-center">
           {isAuthenticated && isMobile && (
             <Button 
@@ -65,10 +64,7 @@ export const Header = ({ setSidebarOpen, isAuthenticated }: HeaderProps) => {
             </Button>
           )}
           
-          {/* Always show logo in header */}
-          <div className="flex items-center">
-            <CcrLogo size="md" className="ml-2" />
-          </div>
+          {/* Logo removed */}
         </div>
 
         <div className="flex items-center space-x-4">

@@ -1,10 +1,9 @@
 
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-import { CcrLogo } from "@/components/CcrLogo";
 import { SidebarNavigation } from "./SidebarNavigation";
 import { SubscriptionInfo } from "./SubscriptionInfo";
-import { User } from "@/types"; // This is the correct import path
+import { User } from "@/types";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SidebarProps {
@@ -30,7 +29,7 @@ export const SidebarComponent = ({
     >
       <div className="flex items-center justify-between px-4 py-3 h-16 bg-sidebar-accent">
         <div className="flex items-center justify-center w-full">
-          <CcrLogo size="md" className="text-[#00b3b0]" />
+          {/* Logo removed */}
         </div>
         {isMobile && (
           <Button 
