@@ -1,6 +1,5 @@
 
 import { useNavigate, Link } from "react-router-dom";
-import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -50,8 +49,8 @@ export const Header = ({ setSidebarOpen, isAuthenticated }: HeaderProps) => {
   };
 
   return (
-    <header className="bg-white dark:bg-background shadow-sm border-b">
-      <div className="flex items-center justify-between h-16 px-4">
+    <header className="bg-white dark:bg-background shadow-sm border-b w-full">
+      <div className="flex items-center justify-between h-16 px-4 w-full">
         <div className="flex items-center">
           {isAuthenticated && (
             <Button 
@@ -63,11 +62,11 @@ export const Header = ({ setSidebarOpen, isAuthenticated }: HeaderProps) => {
               <Menu className="h-5 w-5" />
             </Button>
           )}
-          {!isAuthenticated && (
-            <div className="flex items-center">
-              <CcrLogo />
-            </div>
-          )}
+          
+          {/* Always show logo in header */}
+          <div className="flex items-center">
+            <CcrLogo size="sm" />
+          </div>
         </div>
 
         <div className="flex items-center space-x-4">

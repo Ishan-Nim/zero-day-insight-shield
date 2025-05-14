@@ -8,16 +8,16 @@ interface CcrLogoProps {
 
 export const CcrLogo = ({ size = "md", className }: CcrLogoProps) => {
   const sizeClasses = {
-    sm: "h-6",
+    sm: "h-8",
     md: "h-10",
     lg: "h-20"
   };
 
   return (
     <div className={cn("flex items-center", className)}>
-      <div className="bg-[#1e293b] p-2 rounded flex items-center justify-center">
+      <div className="bg-primary p-1 rounded flex items-center justify-center">
         <div className={cn("flex items-center justify-center", sizeClasses[size])}>
-          <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             {/* Tiffany Blue Background */}
             <rect width="300" height="80" rx="8" fill="#00b3b0" />
             
@@ -30,7 +30,7 @@ export const CcrLogo = ({ size = "md", className }: CcrLogoProps) => {
               fontWeight="bold" 
               fill="white" 
               textAnchor="middle">
-              CYBER CREW SCANNER
+              CYBER CREW
             </text>
             
             {/* Scanner Icon - Simple wave pattern */}
@@ -44,4 +44,4 @@ export const CcrLogo = ({ size = "md", className }: CcrLogoProps) => {
       </div>
     </div>
   );
-};
+}

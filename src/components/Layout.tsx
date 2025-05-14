@@ -16,7 +16,7 @@ export default function Layout({ children }: LayoutProps) {
   const isAdmin = isAuthenticated && currentUser?.role === 'admin';
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen w-full bg-background">
       {/* Sidebar for authenticated users */}
       {isAuthenticated && (
         <SidebarComponent 
@@ -28,7 +28,7 @@ export default function Layout({ children }: LayoutProps) {
       )}
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden w-full">
         {/* Navbar */}
         <Header 
           setSidebarOpen={setSidebarOpen} 
@@ -36,7 +36,7 @@ export default function Layout({ children }: LayoutProps) {
         />
 
         {/* Page content */}
-        <main className="flex-1 overflow-auto bg-background">
+        <main className="flex-1 overflow-auto bg-background w-full">
           {children}
         </main>
       </div>

@@ -23,9 +23,9 @@ export const SidebarComponent = ({
     <aside 
       className={`fixed inset-y-0 left-0 z-20 flex-shrink-0 w-64 bg-sidebar transition-all duration-300 ease-in-out transform ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } md:translate-x-0 md:static md:inset-auto flex flex-col`}
+      } md:translate-x-0 md:static md:inset-auto flex flex-col h-full`}
     >
-      <div className="flex items-center justify-between px-4 py-3 h-20 bg-sidebar-accent">
+      <div className="flex items-center justify-between px-4 py-3 h-16 bg-sidebar-accent">
         <div className="flex items-center flex-1 justify-center">
           <CcrLogo size="md" />
         </div>
