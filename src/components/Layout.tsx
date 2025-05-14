@@ -1,8 +1,6 @@
-
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import { useTheme } from "@/components/ui/theme-provider";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -34,10 +32,7 @@ import {
   UserPlus,
   CreditCard,
   Activity,
-  Info,
-  Sun,
-  Moon,
-  Laptop
+  Info
 } from "lucide-react";
 import LanguageSwitcher from "./ui/LanguageSwitcher";
 import { useLanguage } from "@/i18n";
@@ -49,7 +44,6 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const { currentUser, logout, isAuthenticated } = useAuth();
-  const { theme, setTheme } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
   const { t } = useLanguage();
@@ -92,8 +86,8 @@ export default function Layout({ children }: LayoutProps) {
         >
           <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
             <div className="flex items-center">
-              <Shield className="h-8 w-8 text-tiffany" />
-              <span className="ml-2 text-xl font-semibold text-sidebar-foreground">Cyber Crew</span>
+              <Shield className="h-8 w-8 text-tiffanyBlue" />
+              <span className="ml-2 text-xl font-semibold text-sidebar-foreground">Cyber Crew Scanner</span>
             </div>
             <Button 
               variant="ghost"
@@ -169,38 +163,13 @@ export default function Layout({ children }: LayoutProps) {
               )}
               {!isAuthenticated && (
                 <div className="flex items-center">
-                  <Shield className="h-6 w-6 text-tiffany mr-2" />
+                  <Shield className="h-6 w-6 text-tiffanyBlue mr-2" />
                   <span className="font-semibold text-lg">Cyber Crew Scanner</span>
                 </div>
               )}
             </div>
 
             <div className="flex items-center space-x-4">
-              {/* Theme Toggle Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    {theme === "light" && <Sun className="h-5 w-5" />}
-                    {theme === "dark" && <Moon className="h-5 w-5" />}
-                    {theme === "system" && <Laptop className="h-5 w-5" />}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => setTheme("light")}>
-                    <Sun className="mr-2 h-4 w-4" />
-                    <span>Light</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme("dark")}>
-                    <Moon className="mr-2 h-4 w-4" />
-                    <span>Dark</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme("system")}>
-                    <Laptop className="mr-2 h-4 w-4" />
-                    <span>System</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              
               <LanguageSwitcher />
               
               {isAuthenticated ? (
@@ -213,7 +182,7 @@ export default function Layout({ children }: LayoutProps) {
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="sm" className="relative inline-flex items-center justify-center h-8 w-8 rounded-full">
                         <Avatar className="h-8 w-8">
-                          <AvatarFallback className="bg-tiffany text-primary-foreground">
+                          <AvatarFallback className="bg-primary text-primary-foreground">
                             {currentUser?.name ? getInitials(currentUser.name) : currentUser?.email.substring(0, 2).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
@@ -257,8 +226,8 @@ export default function Layout({ children }: LayoutProps) {
                           For this demo, please use the login page with these credentials:
                         </p>
                         <div className="bg-muted p-3 rounded-md text-sm">
-                          <p><strong>Admin:</strong> admin@cybercrew.com / admin123</p>
-                          <p><strong>User:</strong> demo@cybercrew.com / demo123</p>
+                          <p><strong>Admin:</strong> admin@zeroday.com / admin123</p>
+                          <p><strong>User:</strong> demo@zeroday.com / demo123</p>
                         </div>
                         <div className="flex justify-center">
                           <Button className="w-full" onClick={() => navigate('/login')}>
@@ -269,9 +238,7 @@ export default function Layout({ children }: LayoutProps) {
                       </div>
                     </DialogContent>
                   </Dialog>
-                  <Button onClick={() => navigate('/login')} className="bg-tiffany hover:bg-tiffany-dark">
-                    {t('auth.login')}
-                  </Button>
+                  <Button onClick={() => navigate('/login')}>{t('auth.login')}</Button>
                 </div>
               )}
             </div>

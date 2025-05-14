@@ -11,7 +11,7 @@ const AboutPage = () => {
     <div className="container mx-auto p-6 max-w-4xl">
       <div className="text-center mb-12">
         <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-4">
-          <Shield className="h-12 w-12 text-teal-400" />
+          <Shield className="h-12 w-12 text-primary" />
         </div>
         <h1 className="text-3xl font-bold">{t('about.title')}</h1>
         <h2 className="text-xl text-muted-foreground mt-2">{t('about.subtitle')}</h2>
@@ -24,7 +24,7 @@ const AboutPage = () => {
       </div>
 
       <h3 className="text-2xl font-bold mb-6 flex items-center">
-        <Shield className="h-5 w-5 mr-2 text-teal-400" />
+        <Shield className="h-5 w-5 mr-2 text-primary" />
         {t('about.featuresTitle')}
       </h3>
 
@@ -63,13 +63,13 @@ const AboutPage = () => {
 
       <div className="bg-muted rounded-lg p-8 mb-16">
         <div className="flex items-center mb-4">
-          <Users className="h-6 w-6 mr-2 text-teal-400" />
+          <Users className="h-6 w-6 mr-2 text-primary" />
           <h3 className="text-xl font-bold">{t('about.conclusion')}</h3>
         </div>
         <p className="text-muted-foreground">{t('about.conclusionText')}</p>
         
         <div className="mt-6 text-center border-t pt-6">
-          <p className="text-lg font-medium italic text-teal-400">"{t('about.tagline')}"</p>
+          <p className="text-lg font-medium italic text-primary">"{t('about.tagline')}"</p>
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@ const FeatureCard = ({ icon, title, description, colSpan = "" }: FeatureCardProp
   <Card className={`overflow-hidden ${colSpan}`}>
     <CardHeader className="pb-2">
       <div className="flex items-center space-x-2">
-        <div className="p-1.5 bg-primary/10 rounded-full text-teal-400">
+        <div className="p-1.5 bg-primary/10 rounded-full text-primary">
           {icon}
         </div>
         <CardTitle className="text-lg">{title}</CardTitle>

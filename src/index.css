@@ -1,148 +1,127 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
-    /* RGB values for our new palette */
-    --deep-navy: 9, 16, 29;
-    --deep-navy-light: 19, 26, 39;
-    --deep-navy-dark: 5, 10, 20;
-    
-    --sky-blue: 0, 173, 247;
-    --sky-blue-light: 40, 193, 255;
-    --sky-blue-dark: 0, 143, 207;
-    
-    --bright-cyan: 97, 213, 255;
-    --bright-cyan-light: 137, 233, 255;
-    --bright-cyan-dark: 77, 193, 235;
-    
-    --mid-blue: 41, 91, 187;
-    --mid-blue-light: 61, 111, 207;
-    --mid-blue-dark: 31, 71, 167;
-    
-    --soft-gray: 236, 239, 243;
-    --soft-gray-light: 246, 249, 253;
-    --soft-gray-dark: 216, 219, 223;
-    
-    --dark-charcoal: 35, 42, 55;
-    --dark-charcoal-light: 55, 62, 75;
-    --dark-charcoal-dark: 25, 32, 45;
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
 
-    /* Light mode theme */
-    --background: var(--soft-gray);
-    --foreground: var(--deep-navy);
-    
     --card: 0 0% 100%;
-    --card-foreground: var(--deep-navy);
-    
+    --card-foreground: 222.2 84% 4.9%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: var(--deep-navy);
-    
-    /* Sky Blue as primary */
-    --primary: var(--sky-blue);
-    --primary-foreground: 0 0% 98%;
-    
-    /* Soft Gray for secondary */
-    --secondary: var(--soft-gray);
-    --secondary-foreground: var(--deep-navy);
-    
-    --muted: var(--soft-gray-dark);
-    --muted-foreground: var(--dark-charcoal-light);
-    
-    --accent: var(--bright-cyan);
-    --accent-foreground: var(--deep-navy);
-    
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    
-    --border: var(--soft-gray-dark);
-    --input: var(--soft-gray-dark);
-    --ring: var(--sky-blue);
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
     --radius: 0.5rem;
-    
-    /* Sidebar colors for light mode */
-    --sidebar: var(--deep-navy);
-    --sidebar-foreground: var(--soft-gray);
-    --sidebar-accent: var(--sky-blue);
+
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 173 91% 36%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 25% 27%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 224 76% 48%;
   }
- 
+
   .dark {
-    /* Dark mode theme */
-    --background: var(--deep-navy);
-    --foreground: var(--soft-gray);
-    
-    --card: var(--dark-charcoal);
-    --card-foreground: var(--soft-gray);
-    
-    --popover: var(--dark-charcoal);
-    --popover-foreground: var(--soft-gray);
-    
-    /* Sky Blue remains primary in dark mode */
-    --primary: var(--sky-blue);
-    --primary-foreground: var(--deep-navy);
-    
-    /* Darker charcoal for secondary in dark mode */
-    --secondary: var(--dark-charcoal);
-    --secondary-foreground: var(--soft-gray);
-    
-    --muted: var(--dark-charcoal-light);
-    --muted-foreground: var(--soft-gray-dark);
-    
-    --accent: var(--bright-cyan);
-    --accent-foreground: var(--deep-navy);
-    
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
     
-    --border: var(--dark-charcoal-light);
-    --input: var(--dark-charcoal-light);
-    --ring: var(--sky-blue);
-    
-    /* Sidebar colors for dark mode using mid blue */
-    --sidebar: var(--mid-blue-dark);
-    --sidebar-foreground: var(--soft-gray);
-    --sidebar-accent: var(--sky-blue);
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 173 91% 36%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 25% 27%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 224 76% 48%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
-/* Animation for toasts */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.animate-pulse-dot {
+  position: relative;
 }
 
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
+.animate-pulse-dot:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
 
-.toast-enter {
-  animation: slideInRight 0.3s forwards;
+.high-severity {
+  @apply text-severity-high border-severity-high;
 }
 
-.toast-exit {
-  animation: slideOutRight 0.3s forwards;
+.medium-severity {
+  @apply text-severity-medium border-severity-medium;
+}
+
+.low-severity {
+  @apply text-severity-low border-severity-low;
+}
+
+.info-severity {
+  @apply text-severity-info border-severity-info;
 }

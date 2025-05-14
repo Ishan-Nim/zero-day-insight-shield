@@ -137,8 +137,8 @@ export default function SignupForm() {
           </div>
           <div className="text-center text-xs text-muted-foreground">
             <p>For demo purposes, you can use the login page with:</p>
-            <p>admin@cybercrew.com / admin123</p>
-            <p>demo@cybercrew.com / demo123</p>
+            <p>admin@zeroday.com / admin123</p>
+            <p>demo@zeroday.com / demo123</p>
           </div>
         </div>
       </div>

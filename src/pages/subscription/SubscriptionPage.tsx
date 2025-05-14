@@ -48,7 +48,7 @@ const SubscriptionPage = () => {
         customScans: false,
         dedicatedSupport: false,
       },
-      color: 'bg-tiffany-light/20 dark:bg-tiffany/10',
+      color: 'bg-blue-50 dark:bg-blue-900/20',
       popular: true,
     },
     {
@@ -66,7 +66,7 @@ const SubscriptionPage = () => {
         customScans: true,
         dedicatedSupport: false,
       },
-      color: 'bg-darkblue-light/20 dark:bg-darkblue/20',
+      color: 'bg-purple-50 dark:bg-purple-900/20',
     },
     {
       id: 'enterprise',
@@ -83,7 +83,7 @@ const SubscriptionPage = () => {
         customScans: true,
         dedicatedSupport: true,
       },
-      color: 'bg-tiffany-light/10 dark:bg-tiffany/5',
+      color: 'bg-green-50 dark:bg-green-900/20',
     }
   ];
 
@@ -120,16 +120,16 @@ const SubscriptionPage = () => {
           />
           <Label htmlFor="billing-toggle" className="flex items-center">
             {t('subscription.yearlyBilling')}
-            <span className="ml-2 bg-tiffany/20 text-tiffany-dark dark:text-tiffany text-xs px-2 py-0.5 rounded-full">-20%</span>
+            <span className="ml-2 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full dark:bg-green-800 dark:text-green-100">-20%</span>
           </Label>
         </div>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         {pricingPlans.map((plan) => (
-          <Card key={plan.id} className={`overflow-hidden border ${plan.popular ? 'border-tiffany ring-1 ring-tiffany' : ''}`}>
+          <Card key={plan.id} className={`overflow-hidden border ${plan.popular ? 'border-primary ring-1 ring-primary' : ''}`}>
             {plan.popular && (
-              <div className="bg-tiffany text-primary-foreground text-center text-xs font-medium py-1">
+              <div className="bg-primary text-primary-foreground text-center text-xs font-medium py-1">
                 {t('subscription.currentPlan')}
               </div>
             )}
@@ -186,7 +186,7 @@ const SubscriptionPage = () => {
               
               <div className="mt-6">
                 {plan.id === 'enterprise' ? (
-                  <Button className="w-full bg-darkblue hover:bg-darkblue-dark" onClick={handleContactSales}>
+                  <Button className="w-full" onClick={handleContactSales}>
                     {t('subscription.contact')}
                   </Button>
                 ) : userPlanId === plan.id ? (
@@ -196,7 +196,7 @@ const SubscriptionPage = () => {
                   </Button>
                 ) : (
                   <Button 
-                    className="w-full bg-tiffany hover:bg-tiffany-dark" 
+                    className="w-full" 
                     variant={userPlanId === plan.id ? "outline" : "default"}
                     onClick={() => handleSubscribe(plan.id)}
                   >
@@ -218,7 +218,7 @@ const SubscriptionPage = () => {
 
 const FeatureItem = ({ feature, included }: { feature: string, included: boolean }) => (
   <li className="flex items-start">
-    <span className={`flex-shrink-0 h-5 w-5 ${included ? 'text-tiffany dark:text-tiffany' : 'text-muted-foreground'}`}>
+    <span className={`flex-shrink-0 h-5 w-5 ${included ? 'text-green-500' : 'text-muted-foreground'}`}>
       {included ? (
         <Check className="h-5 w-5" />
       ) : (

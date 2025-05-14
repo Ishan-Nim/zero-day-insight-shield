@@ -34,7 +34,7 @@ const App = () => {
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider defaultTheme="system" storageKey="cybercrew-theme">
+        <ThemeProvider defaultTheme="light" storageKey="zeroday-theme">
           <AuthProvider>
             <AdminNotificationProvider>
               <TooltipProvider>

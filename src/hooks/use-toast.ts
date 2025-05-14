@@ -1,20 +1,18 @@
 import * as React from "react"
-import { toast as sonnerToast, ToastT } from "sonner"
 
-const TOAST_LIMIT = 5
+import type {
+  ToastActionElement,
+  ToastProps,
+} from "@/components/ui/toast"
+
+const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
 
-type ToasterToast = {
+type ToasterToast = ToastProps & {
   id: string
   title?: React.ReactNode
   description?: React.ReactNode
-  action?: React.ReactNode
-  duration?: number
-  variant?: "default" | "destructive" | "success" | "info"
-  toastOptions?: {
-    onOpenChange?: (open: boolean) => void
-    onAutoClose?: (toast: ToastT) => void
-  }
+  action?: ToastActionElement
 }
 
 const actionTypes = {
@@ -27,7 +25,7 @@ const actionTypes = {
 let count = 0
 
 function genId() {
-  count = (count + 1) % Number.MAX_VALUE
+  count = (count + 1) % Number.MAX_SAFE_INTEGER
   return count.toString()
 }
 
@@ -44,11 +42,11 @@ type Action =
     }
   | {
       type: ActionType["DISMISS_TOAST"]
-      toastId?: string
+      toastId?: ToasterToast["id"]
     }
   | {
       type: ActionType["REMOVE_TOAST"]
-      toastId?: string
+      toastId?: ToasterToast["id"]
     }
 
 interface State {
@@ -108,10 +106,7 @@ export const reducer = (state: State, action: Action): State => {
           t.id === toastId || toastId === undefined
             ? {
                 ...t,
-                toastOptions: {
-                  ...t.toastOptions,
-                  open: false,
-                },
+                open: false,
               }
             : t
         ),
@@ -142,12 +137,12 @@ function dispatch(action: Action) {
   })
 }
 
-interface Toast extends Omit<ToasterToast, "id"> {}
+type Toast = Omit<ToasterToast, "id">
 
-function toast({ title, description, action, variant, duration, ...props }: Toast) {
+function toast({ ...props }: Toast) {
   const id = genId()
 
-  const update = (props: Toast) =>
+  const update = (props: ToasterToast) =>
     dispatch({
       type: "UPDATE_TOAST",
       toast: { ...props, id },
@@ -157,13 +152,12 @@ function toast({ title, description, action, variant, duration, ...props }: Toas
   dispatch({
     type: "ADD_TOAST",
     toast: {
-      id,
-      title,
-      description,
-      action,
-      variant,
-      duration,
       ...props,
+      id,
+      open: true,
+      onOpenChange: (open) => {
+        if (!open) dismiss()
+      },
     },
   })
 
