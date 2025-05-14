@@ -251,7 +251,7 @@ export const mockScanResults = [
     targetId: '1',
     startTime: new Date(2023, 3, 15, 9, 0), 
     endTime: new Date(2023, 3, 15, 10, 30),
-    status: 'completed',
+    status: 'completed' as const,
     vulnerabilities: mockVulnerabilities.filter(v => v.targetId === '1'),
     summary: {
       totalUrls: 150,
@@ -267,7 +267,7 @@ export const mockScanResults = [
     targetId: '2',
     startTime: new Date(2023, 4, 2, 14, 0),
     endTime: new Date(2023, 4, 2, 15, 15),
-    status: 'completed',
+    status: 'completed' as const,
     vulnerabilities: mockVulnerabilities.filter(v => v.targetId === '2'),
     summary: {
       totalUrls: 80,
@@ -282,7 +282,7 @@ export const mockScanResults = [
     id: '3',
     targetId: '3',
     startTime: new Date(2023, 4, 10, 11, 0),
-    status: 'in_progress',
+    status: 'in_progress' as const,
     vulnerabilities: [],
     summary: {
       totalUrls: 120,
@@ -297,7 +297,7 @@ export const mockScanResults = [
     id: '4',
     targetId: '4',
     startTime: new Date(2023, 4, 12, 9, 30),
-    status: 'queued',
+    status: 'queued' as const,
     vulnerabilities: [],
     summary: {
       totalUrls: 0,
@@ -313,7 +313,7 @@ export const mockScanResults = [
     targetId: '5',
     startTime: new Date(2023, 4, 8, 14, 0),
     endTime: new Date(2023, 4, 8, 14, 15),
-    status: 'failed',
+    status: 'failed' as const,
     vulnerabilities: [],
     summary: {
       totalUrls: 10,
