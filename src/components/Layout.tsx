@@ -36,6 +36,7 @@ import {
   Info
 } from "lucide-react";
 import LanguageSwitcher from "./ui/LanguageSwitcher";
+import { ThemeToggle } from "./ui/theme-toggle";
 import { useLanguage } from "@/i18n";
 import { toast } from "@/components/ui/use-toast";
 
@@ -171,6 +172,7 @@ export default function Layout({ children }: LayoutProps) {
             </div>
 
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <LanguageSwitcher />
               
               {isAuthenticated ? (

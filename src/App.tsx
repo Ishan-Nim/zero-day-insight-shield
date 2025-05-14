@@ -44,7 +44,7 @@ const App = () => {
     <React.StrictMode>
       <ErrorBoundary>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider defaultTheme="light" storageKey="cybercrew-theme">
+          <ThemeProvider defaultTheme="system" storageKey="cybercrew-theme">
             <AuthProvider>
               <AdminNotificationProvider>
                 <TooltipProvider>
