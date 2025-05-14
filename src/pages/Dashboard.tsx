@@ -5,7 +5,7 @@ import VulnerabilityCard from "@/components/dashboard/VulnerabilityCard";
 import RecentScans from "@/components/dashboard/RecentScans";
 import TargetsOverview from "@/components/dashboard/TargetsOverview";
 import VulnerabilitySeverityChart from "@/components/dashboard/VulnerabilitySeverityChart";
-import { mockScanResults, mockTargets, mockVulnerabilities } from "@/data/mockData";
+import { mockScanResults, mockTargets } from "@/data/mockData";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Dashboard() {
