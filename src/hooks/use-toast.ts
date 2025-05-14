@@ -1,10 +1,5 @@
 import * as React from "react"
-import {
-  Toast as SonnerToast,
-  toast as sonnerToast,
-  ToastOptions as SonnerToastOptions,
-  ToastT,
-} from "sonner"
+import { toast as sonnerToast, ToastT } from "sonner"
 
 const TOAST_LIMIT = 5
 const TOAST_REMOVE_DELAY = 1000000
@@ -14,7 +9,9 @@ type ToasterToast = {
   title?: React.ReactNode
   description?: React.ReactNode
   action?: React.ReactNode
-  toastOptions?: SonnerToastOptions & {
+  duration?: number
+  variant?: "default" | "destructive" | "success" | "info"
+  toastOptions?: {
     onOpenChange?: (open: boolean) => void
     onAutoClose?: (toast: ToastT) => void
   }
@@ -147,7 +144,7 @@ function dispatch(action: Action) {
 
 interface Toast extends Omit<ToasterToast, "id"> {}
 
-function toast({ title, description, action, ...props }: Toast) {
+function toast({ title, description, action, variant, duration, ...props }: Toast) {
   const id = genId()
 
   const update = (props: Toast) =>
@@ -164,6 +161,8 @@ function toast({ title, description, action, ...props }: Toast) {
       title,
       description,
       action,
+      variant,
+      duration,
       ...props,
     },
   })
