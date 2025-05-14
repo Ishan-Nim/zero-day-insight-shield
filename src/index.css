@@ -5,88 +5,105 @@
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    /* RGB values for our new palette */
+    --deep-navy: 9, 16, 29;
+    --deep-navy-light: 19, 26, 39;
+    --deep-navy-dark: 5, 10, 20;
     
-    /* Tiffany Blue as primary */
-    --primary: 171 72% 49%;
+    --sky-blue: 0, 173, 247;
+    --sky-blue-light: 40, 193, 255;
+    --sky-blue-dark: 0, 143, 207;
+    
+    --bright-cyan: 97, 213, 255;
+    --bright-cyan-light: 137, 233, 255;
+    --bright-cyan-dark: 77, 193, 235;
+    
+    --mid-blue: 41, 91, 187;
+    --mid-blue-light: 61, 111, 207;
+    --mid-blue-dark: 31, 71, 167;
+    
+    --soft-gray: 236, 239, 243;
+    --soft-gray-light: 246, 249, 253;
+    --soft-gray-dark: 216, 219, 223;
+    
+    --dark-charcoal: 35, 42, 55;
+    --dark-charcoal-light: 55, 62, 75;
+    --dark-charcoal-dark: 25, 32, 45;
+
+    /* Light mode theme */
+    --background: var(--soft-gray);
+    --foreground: var(--deep-navy);
+    
+    --card: 0 0% 100%;
+    --card-foreground: var(--deep-navy);
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--deep-navy);
+    
+    /* Sky Blue as primary */
+    --primary: var(--sky-blue);
     --primary-foreground: 0 0% 98%;
     
-    /* Gray for secondary colors */
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 220 14% 96%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 220 14% 96%;
-    --accent-foreground: 240 5.9% 10%;
+    /* Soft Gray for secondary */
+    --secondary: var(--soft-gray);
+    --secondary-foreground: var(--deep-navy);
+    
+    --muted: var(--soft-gray-dark);
+    --muted-foreground: var(--dark-charcoal-light);
+    
+    --accent: var(--bright-cyan);
+    --accent-foreground: var(--deep-navy);
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 171 72% 49%;
+    
+    --border: var(--soft-gray-dark);
+    --input: var(--soft-gray-dark);
+    --ring: var(--sky-blue);
     --radius: 0.5rem;
     
     /* Sidebar colors for light mode */
-    --sidebar: 171 72% 90%;
-    --sidebar-foreground: 240 10% 3.9%;
-    --sidebar-accent: 171 72% 85%;
-    
-    /* Tiffany Blue Colors */
-    --tiffany-blue: 171 72% 49%;
-    --tiffany-blue-light: 171 72% 85%;
-    --tiffany-blue-dark: 171 72% 30%;
-    
-    /* Dark Blue Colors */
-    --dark-blue: 220 70% 20%;
-    --dark-blue-light: 220 70% 40%;
-    --dark-blue-dark: 220 70% 15%;
+    --sidebar: var(--deep-navy);
+    --sidebar-foreground: var(--soft-gray);
+    --sidebar-accent: var(--sky-blue);
   }
  
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    /* Dark mode theme */
+    --background: var(--deep-navy);
+    --foreground: var(--soft-gray);
     
-    /* Keeping tiffany blue as primary even in dark mode */
-    --primary: 171 72% 49%;
-    --primary-foreground: 240 5.9% 10%;
+    --card: var(--dark-charcoal);
+    --card-foreground: var(--soft-gray);
     
-    /* Darker grays for dark mode */
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --popover: var(--dark-charcoal);
+    --popover-foreground: var(--soft-gray);
+    
+    /* Sky Blue remains primary in dark mode */
+    --primary: var(--sky-blue);
+    --primary-foreground: var(--deep-navy);
+    
+    /* Darker charcoal for secondary in dark mode */
+    --secondary: var(--dark-charcoal);
+    --secondary-foreground: var(--soft-gray);
+    
+    --muted: var(--dark-charcoal-light);
+    --muted-foreground: var(--soft-gray-dark);
+    
+    --accent: var(--bright-cyan);
+    --accent-foreground: var(--deep-navy);
     
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 171 72% 49%;
     
-    /* Sidebar colors for dark mode using dark blue */
-    --sidebar: 220 70% 20%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-accent: 220 70% 25%;
+    --border: var(--dark-charcoal-light);
+    --input: var(--dark-charcoal-light);
+    --ring: var(--sky-blue);
     
-    /* Tiffany Blue Colors - slightly adjusted for dark mode */
-    --tiffany-blue: 171 72% 49%;
-    --tiffany-blue-light: 171 72% 65%;
-    --tiffany-blue-dark: 171 72% 30%;
-    
-    /* Dark Blue Colors remain the same */
-    --dark-blue: 220 70% 20%;
-    --dark-blue-light: 220 70% 30%;
-    --dark-blue-dark: 220 70% 15%;
+    /* Sidebar colors for dark mode using mid blue */
+    --sidebar: var(--mid-blue-dark);
+    --sidebar-foreground: var(--soft-gray);
+    --sidebar-accent: var(--sky-blue);
   }
 }
  

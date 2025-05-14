@@ -58,15 +58,36 @@ export default {
           foreground: "hsl(var(--sidebar-foreground))",
           accent: "hsl(var(--sidebar-accent))",
         },
-        tiffany: {
-          DEFAULT: "hsl(var(--tiffany-blue))",
-          light: "hsl(var(--tiffany-blue-light))",
-          dark: "hsl(var(--tiffany-blue-dark))",
+        // Updated color configurations using the RGB palette
+        navy: {
+          DEFAULT: "rgb(var(--deep-navy))",
+          light: "rgb(var(--deep-navy-light))",
+          dark: "rgb(var(--deep-navy-dark))",
         },
-        darkblue: {
-          DEFAULT: "hsl(var(--dark-blue))",
-          light: "hsl(var(--dark-blue-light))",
-          dark: "hsl(var(--dark-blue-dark))",
+        skyblue: {
+          DEFAULT: "rgb(var(--sky-blue))",
+          light: "rgb(var(--sky-blue-light))",
+          dark: "rgb(var(--sky-blue-dark))",
+        },
+        cyan: {
+          DEFAULT: "rgb(var(--bright-cyan))",
+          light: "rgb(var(--bright-cyan-light))",
+          dark: "rgb(var(--bright-cyan-dark))",
+        },
+        midblue: {
+          DEFAULT: "rgb(var(--mid-blue))",
+          light: "rgb(var(--mid-blue-light))",
+          dark: "rgb(var(--mid-blue-dark))",
+        },
+        charcoal: {
+          DEFAULT: "rgb(var(--dark-charcoal))",
+          light: "rgb(var(--dark-charcoal-light))",
+          dark: "rgb(var(--dark-charcoal-dark))",
+        },
+        softgray: {
+          DEFAULT: "rgb(var(--soft-gray))",
+          light: "rgb(var(--soft-gray-light))",
+          dark: "rgb(var(--soft-gray-dark))",
         },
       },
       borderRadius: {

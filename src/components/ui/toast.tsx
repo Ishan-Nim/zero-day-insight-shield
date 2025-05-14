@@ -31,8 +31,8 @@ const toastVariants = cva(
         default: "border bg-background text-foreground",
         destructive:
           "destructive group border-destructive bg-destructive text-destructive-foreground",
-        success: "border-teal-500 bg-teal-50 dark:bg-teal-900/50 text-teal-900 dark:text-teal-100",
-        info: "border-tiffany-blue bg-tiffany-blue/10 dark:bg-tiffany-blue/20 text-tiffany-blue-dark dark:text-tiffany-blue-light",
+        success: "border-green-500 bg-green-50 dark:bg-green-900/50 text-green-900 dark:text-green-100",
+        info: "border-skyblue bg-skyblue/10 dark:bg-skyblue/20 text-skyblue-dark dark:text-skyblue-light",
       },
     },
     defaultVariants: {
@@ -63,7 +63,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-tiffany-blue bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-tiffany-blue hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive",
+      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-skyblue bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-skyblue hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive",
       className
     )}
     {...props}
