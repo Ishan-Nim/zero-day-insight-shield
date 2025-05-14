@@ -30,7 +30,7 @@ export default function Dashboard() {
   const failedScans = mockScanResults.filter(scan => scan.status === "failed").length;
 
   return (
-    <div className="p-4 sm:p-6 max-w-full">
+    <div className="p-4 md:p-6 max-w-full">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <div className="text-sm text-muted-foreground mt-2 sm:mt-0">
@@ -38,7 +38,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <ScanStatusCard
           title="Active Scans"
           count={inProgressScans}
@@ -65,7 +65,7 @@ export default function Dashboard() {
         />
       </div>
 
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-4 sm:mt-6">
+      <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-4 md:mt-6">
         <VulnerabilityCard
           type="high"
           count={latestScan?.summary.highSeverity || 0}
@@ -88,7 +88,7 @@ export default function Dashboard() {
         />
       </div>
 
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2 mt-4 sm:mt-6">
+      <div className="grid gap-4 md:gap-6 grid-cols-1 lg:grid-cols-2 mt-4 md:mt-6">
         <VulnerabilitySeverityChart
           high={latestScan?.summary.highSeverity || 0}
           medium={latestScan?.summary.mediumSeverity || 0}
@@ -100,7 +100,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="mt-4 sm:mt-6">
+      <div className="mt-4 md:mt-6">
         <RecentScans scans={mockScanResults} />
       </div>
     </div>

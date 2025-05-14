@@ -29,7 +29,7 @@ export default function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <div className="flex w-full h-screen overflow-hidden bg-background">
+    <div className="flex w-full h-screen overflow-hidden bg-slate-50 dark:bg-background">
       {/* Sidebar for authenticated users */}
       {isAuthenticated && (
         <SidebarComponent 
@@ -51,7 +51,7 @@ export default function Layout({ children }: LayoutProps) {
         )}
 
         {/* Page content - full width */}
-        <main className="flex-1 overflow-auto w-full bg-background">
+        <main className="flex-1 overflow-auto w-full bg-slate-50 dark:bg-background">
           {children}
         </main>
       </div>

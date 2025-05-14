@@ -25,6 +25,11 @@ export default function LoginForm() {
       navigate("/");
     } catch (error) {
       console.error("Login error:", error);
+      toast({
+        title: "Login failed",
+        description: "Please check your email and password and try again.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -53,6 +58,7 @@ export default function LoginForm() {
                 disabled={isSubmitting}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="bg-slate-50 dark:bg-slate-800"
               />
             </div>
             <div className="grid gap-2">
@@ -60,7 +66,7 @@ export default function LoginForm() {
                 <Label htmlFor="password">Password</Label>
                 <Link
                   to="/forgot-password"
-                  className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+                  className="text-sm font-medium text-blue-600 underline-offset-4 hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -73,9 +79,14 @@ export default function LoginForm() {
                 disabled={isSubmitting}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="bg-slate-50 dark:bg-slate-800"
               />
             </div>
-            <Button disabled={isSubmitting} type="submit" className="mt-2 bg-blue-600 hover:bg-blue-700">
+            <Button 
+              disabled={isSubmitting} 
+              type="submit" 
+              className="mt-2 bg-blue-600 hover:bg-blue-700 text-white"
+            >
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Sign In
             </Button>
@@ -83,7 +94,7 @@ export default function LoginForm() {
         </form>
         <div className="mt-4 text-center text-sm">
           Don't have an account?{" "}
-          <Link to="/signup" className="underline text-primary hover:text-primary/80">
+          <Link to="/signup" className="text-blue-600 underline-offset-4 hover:underline font-medium">
             Sign up
           </Link>
         </div>
@@ -92,7 +103,7 @@ export default function LoginForm() {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">DEMO CREDENTIALS</span>
+            <span className="bg-white dark:bg-background px-2 text-muted-foreground">DEMO CREDENTIALS</span>
           </div>
         </div>
         <div className="text-center text-xs text-muted-foreground space-y-1">
@@ -102,4 +113,4 @@ export default function LoginForm() {
       </div>
     </div>
   );
-};
+}
