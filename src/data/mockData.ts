@@ -1,277 +1,329 @@
 
-// ScanTarget interface from this file
-export interface ScanTarget {
-  id: string;
-  name: string;
-  url: string;
-  description?: string;
-  customerId: string;
-  verified: boolean;
-  status: 'active' | 'inactive' | 'scanning';
-  lastScan?: Date;
-  // Adding the missing properties to match types/index.ts
-  owner: string;
-  createdAt: Date;
-  scanDepth?: 'shallow' | 'normal' | 'deep';
-  excludedPaths?: string[];
-}
+import { ScanTarget, ScanResult, Vulnerability, SubscriptionPlan, Report } from '@/types';
 
-export interface Customer {
-  id: string;
-  name: string;
-  email: string;
-  industry: string;
-  numTargets: number;
-  riskLevel: 'high' | 'medium' | 'low';
-}
-
-export interface Report {
-  id: string;
-  targetId: string;
-  targetName: string;
-  customerId: string;
-  scanDate: Date;
-  vulnerabilities: {
-    critical?: number;
-    high: number;
-    medium: number;
-    low: number;
-  };
-  vulnerabilityTypes: string[];
-  status: 'sent' | 'pending' | 'failed';
-}
-
-// Import Vulnerability type from the types file
-import { Vulnerability as TypedVulnerability, ScanResult } from "@/types";
-
-// Add the missing mockTargets export
 export const mockTargets: ScanTarget[] = [
   {
     id: '1',
-    name: 'Corporate Website',
     url: 'https://example.com',
+    name: 'Example Website',
     description: 'Main corporate website',
-    customerId: '2',
-    verified: true,
+    lastScan: new Date('2023-05-10T14:30:00'),
+    nextScan: new Date('2023-05-17T14:30:00'),
     status: 'active',
-    lastScan: new Date(2023, 1, 1),
-    owner: 'user-123',
-    createdAt: new Date(2022, 9, 15)
+    verified: true,
+    owner: '2',
+    createdAt: new Date('2023-01-15'),
+    scanDepth: 'normal',
+    excludedPaths: ['/admin', '/private']
   },
   {
     id: '2',
-    name: 'Customer Portal',
-    url: 'https://customer.example.com',
-    description: 'Website for customers to manage their accounts',
-    customerId: '2',
-    verified: false,
+    url: 'https://blog.example.com',
+    name: 'Example Blog',
+    description: 'Company blog running on WordPress',
+    lastScan: new Date('2023-05-05T10:15:00'),
     status: 'active',
-    lastScan: new Date(2023, 2, 15),
-    owner: 'user-123',
-    createdAt: new Date(2022, 10, 5)
+    verified: true,
+    owner: '2',
+    createdAt: new Date('2023-02-20')
   },
   {
     id: '3',
-    name: 'API Gateway',
-    url: 'https://api.example.com',
-    description: 'API gateway for mobile app',
-    customerId: '2',
-    verified: true,
+    url: 'https://store.example.com',
+    name: 'Example Store',
+    description: 'E-commerce website',
+    lastScan: new Date('2023-05-12T08:45:00'),
     status: 'scanning',
-    lastScan: new Date(2023, 3, 1),
-    owner: 'user-123',
-    createdAt: new Date(2022, 11, 10)
+    verified: true,
+    owner: '2',
+    createdAt: new Date('2023-03-05')
   },
   {
     id: '4',
-    name: 'Marketing Website',
-    url: 'https://marketing.example.com',
-    description: 'Marketing website for the company',
-    customerId: '2',
-    verified: false,
+    url: 'https://dev.example.com',
+    name: 'Development Server',
+    description: 'Staging environment',
     status: 'inactive',
-    lastScan: new Date(2022, 12, 1),
-    owner: 'user-123',
-    createdAt: new Date(2022, 8, 20)
+    verified: false,
+    owner: '2',
+    createdAt: new Date('2023-04-10')
   },
-  {
-    id: '5',
-    name: 'Internal Dashboard',
-    url: 'https://dashboard.example.com',
-    description: 'Internal dashboard for employees',
-    customerId: '2',
-    verified: true,
-    status: 'active',
-    lastScan: new Date(2023, 4, 1),
-    owner: 'user-123',
-    createdAt: new Date(2022, 7, 30)
-  }
 ];
 
-// Updated mockVulnerabilities to match the Vulnerability type from types/index.ts
-export const mockVulnerabilities: TypedVulnerability[] = [
+export const mockVulnerabilities: Vulnerability[] = [
   {
-    id: '1',
-    name: 'Cross-Site Scripting (XSS)',
-    description: 'A cross-site scripting vulnerability was found in the search functionality.',
-    severity: 'high',
-    url: '/search?q=<script>alert("XSS")</script>',
-    date: new Date(2023, 3, 15),
-    status: 'open',
-    category: 'XSS',
-    cwe: 'CWE-79',
-    remediation: 'Implement proper input validation and output encoding.'
-  },
-  {
-    id: '2',
+    id: 'v1',
     name: 'SQL Injection',
-    description: 'A SQL injection vulnerability was found in the login form.',
+    description: 'SQL Injection vulnerability in login form',
     severity: 'high',
-    url: '/login',
-    date: new Date(2023, 3, 15),
+    url: 'https://example.com/login',
+    date: new Date('2023-05-10T14:35:00'),
     status: 'open',
     category: 'Injection',
     cwe: 'CWE-89',
-    remediation: 'Use parameterized queries and input validation.'
+    remediation: 'Use prepared statements and parameterized queries'
   },
   {
-    id: '3',
-    name: 'Broken Authentication',
-    description: 'The application does not properly validate user credentials.',
+    id: 'v2',
+    name: 'Cross-Site Scripting (XSS)',
+    description: 'Stored XSS in comment section',
+    severity: 'high',
+    url: 'https://blog.example.com/post/1#comments',
+    date: new Date('2023-05-05T10:20:00'),
+    status: 'open',
+    category: 'XSS',
+    cwe: 'CWE-79',
+    remediation: 'Implement proper output encoding and use Content-Security-Policy'
+  },
+  {
+    id: 'v3',
+    name: 'Missing CSRF Token',
+    description: 'CSRF protection missing on form submission',
     severity: 'medium',
-    url: '/login',
-    date: new Date(2023, 4, 2),
-    status: 'fixed',
-    category: 'Authentication',
-    cwe: 'CWE-287',
-    remediation: 'Implement strong authentication mechanisms.'
+    url: 'https://example.com/profile/update',
+    date: new Date('2023-05-10T14:40:00'),
+    status: 'open',
+    category: 'CSRF',
+    cwe: 'CWE-352',
+    remediation: 'Implement anti-CSRF tokens in all forms'
   },
   {
-    id: '4',
-    name: 'Rate Limiting Bypass',
-    description: 'The API is vulnerable to rate limiting bypass.',
+    id: 'v4',
+    name: 'Sensitive Information in robots.txt',
+    description: 'robots.txt contains paths to sensitive directories',
     severity: 'low',
-    url: '/api/v1/users',
-    date: new Date(2023, 4, 10),
+    url: 'https://example.com/robots.txt',
+    date: new Date('2023-05-10T14:45:00'),
+    status: 'fixed',
+    category: 'Information Disclosure',
+    cwe: 'CWE-200',
+    remediation: 'Remove sensitive paths from robots.txt'
+  },
+  {
+    id: 'v5',
+    name: 'Outdated jQuery Version',
+    description: 'Using jQuery v1.8.3 with known vulnerabilities',
+    severity: 'medium',
+    url: 'https://example.com',
+    date: new Date('2023-05-10T14:50:00'),
+    status: 'open',
+    category: 'Outdated Software',
+    cwe: 'CWE-1104',
+    remediation: 'Update to the latest jQuery version'
+  },
+  {
+    id: 'v6',
+    name: 'Insecure SSL/TLS Configuration',
+    description: 'TLS 1.0/1.1 and weak cipher suites enabled',
+    severity: 'medium',
+    url: 'https://example.com',
+    date: new Date('2023-05-10T14:55:00'),
+    status: 'open',
+    category: 'Insecure Configuration',
+    cwe: 'CWE-327',
+    remediation: 'Disable TLS 1.0/1.1 and weak cipher suites'
+  },
+  {
+    id: 'v7',
+    name: 'Directory Listing Enabled',
+    description: 'Directory listing enabled exposing file structure',
+    severity: 'low',
+    url: 'https://example.com/images/',
+    date: new Date('2023-05-10T15:00:00'),
+    status: 'open',
+    category: 'Information Disclosure',
+    cwe: 'CWE-548',
+    remediation: 'Disable directory listing in web server configuration'
+  },
+  {
+    id: 'v8',
+    name: 'Open Redirect',
+    description: 'Unvalidated redirect parameter in login functionality',
+    severity: 'low',
+    url: 'https://example.com/login?redirect=',
+    date: new Date('2023-05-10T15:05:00'),
     status: 'ignored',
-    category: 'API Security',
-    cwe: 'CWE-770',
-    remediation: 'Implement proper rate limiting mechanisms.'
+    category: 'Unvalidated Redirects',
+    cwe: 'CWE-601',
+    remediation: 'Implement a whitelist of allowed redirect URLs'
+  },
+  {
+    id: 'v9',
+    name: 'Session ID in URL',
+    description: 'Session identifiers included in URL parameters',
+    severity: 'medium',
+    url: 'https://example.com/home?session=abc123',
+    date: new Date('2023-05-10T15:10:00'),
+    status: 'open',
+    category: 'Session Management',
+    cwe: 'CWE-598',
+    remediation: 'Use cookies with secure and HttpOnly flags for session management'
+  },
+  {
+    id: 'v10',
+    name: 'Missing Security Headers',
+    description: 'Security headers like CSP, X-XSS-Protection missing',
+    severity: 'info',
+    url: 'https://example.com',
+    date: new Date('2023-05-10T15:15:00'),
+    status: 'open',
+    category: 'Security Headers',
+    cwe: 'CWE-693',
+    remediation: 'Implement proper security headers in HTTP responses'
   }
 ];
 
-// Create mock scan results that match the ScanResult interface
 export const mockScanResults: ScanResult[] = [
   {
-    id: '1',
+    id: 'scan1',
     targetId: '1',
-    startTime: new Date(2023, 3, 15, 9, 0), 
-    endTime: new Date(2023, 3, 15, 10, 30),
+    startTime: new Date('2023-05-10T14:30:00'),
+    endTime: new Date('2023-05-10T15:20:00'),
     status: 'completed',
-    vulnerabilities: mockVulnerabilities.filter(v => v.id === '1' || v.id === '2'),
-    summary: {
-      totalUrls: 150,
-      scannedUrls: 145,
-      highSeverity: 3,
-      mediumSeverity: 7,
-      lowSeverity: 12,
-      infoSeverity: 5
-    }
-  },
-  {
-    id: '2',
-    targetId: '2',
-    startTime: new Date(2023, 4, 2, 14, 0),
-    endTime: new Date(2023, 4, 2, 15, 15),
-    status: 'completed',
-    vulnerabilities: mockVulnerabilities.filter(v => v.id === '3'),
-    summary: {
-      totalUrls: 80,
-      scannedUrls: 78,
-      highSeverity: 2,
-      mediumSeverity: 5,
-      lowSeverity: 8,
-      infoSeverity: 3
-    }
-  },
-  {
-    id: '3',
-    targetId: '3',
-    startTime: new Date(2023, 4, 10, 11, 0),
-    status: 'in_progress',
-    vulnerabilities: [],
+    vulnerabilities: [
+      mockVulnerabilities[0],
+      mockVulnerabilities[2],
+      mockVulnerabilities[3],
+      mockVulnerabilities[5],
+      mockVulnerabilities[9]
+    ],
     summary: {
       totalUrls: 120,
-      scannedUrls: 45,
-      highSeverity: 0,
+      scannedUrls: 118,
+      highSeverity: 1,
+      mediumSeverity: 2,
+      lowSeverity: 1,
+      infoSeverity: 1
+    }
+  },
+  {
+    id: 'scan2',
+    targetId: '2',
+    startTime: new Date('2023-05-05T10:15:00'),
+    endTime: new Date('2023-05-05T11:30:00'),
+    status: 'completed',
+    vulnerabilities: [mockVulnerabilities[1], mockVulnerabilities[6], mockVulnerabilities[7]],
+    summary: {
+      totalUrls: 85,
+      scannedUrls: 85,
+      highSeverity: 1,
       mediumSeverity: 0,
+      lowSeverity: 2,
+      infoSeverity: 0
+    }
+  },
+  {
+    id: 'scan3',
+    targetId: '3',
+    startTime: new Date('2023-05-12T08:45:00'),
+    status: 'in_progress',
+    vulnerabilities: [mockVulnerabilities[4], mockVulnerabilities[8]],
+    summary: {
+      totalUrls: 200,
+      scannedUrls: 75,
+      highSeverity: 0,
+      mediumSeverity: 2,
       lowSeverity: 0,
       infoSeverity: 0
     }
   },
   {
-    id: '4',
-    targetId: '4',
-    startTime: new Date(2023, 4, 12, 9, 30),
-    status: 'queued',
-    vulnerabilities: [],
+    id: 'scan4',
+    targetId: '1',
+    startTime: new Date('2023-04-10T09:30:00'),
+    endTime: new Date('2023-04-10T10:45:00'),
+    status: 'completed',
+    vulnerabilities: [
+      mockVulnerabilities[0],
+      mockVulnerabilities[2],
+      mockVulnerabilities[3],
+      mockVulnerabilities[9]
+    ],
     summary: {
-      totalUrls: 0,
-      scannedUrls: 0,
-      highSeverity: 0,
-      mediumSeverity: 0,
-      lowSeverity: 0,
-      infoSeverity: 0
+      totalUrls: 115,
+      scannedUrls: 115,
+      highSeverity: 1,
+      mediumSeverity: 1,
+      lowSeverity: 1,
+      infoSeverity: 1
     }
-  },
-  {
-    id: '5',
-    targetId: '5',
-    startTime: new Date(2023, 4, 8, 14, 0),
-    endTime: new Date(2023, 4, 8, 14, 15),
-    status: 'failed',
-    vulnerabilities: [],
-    summary: {
-      totalUrls: 10,
-      scannedUrls: 5,
-      highSeverity: 0,
-      mediumSeverity: 0,
-      lowSeverity: 0,
-      infoSeverity: 0
-    },
-    error: 'Connection timeout after 15 seconds'
   }
 ];
 
-// Function to generate a UUID-like string without external dependencies
-function generateUUID(): string {
-  return 'xxxx-xxxx-xxxx-xxxx'.replace(/[x]/g, () => {
-    const r = Math.floor(Math.random() * 16);
-    return r.toString(16);
-  });
-}
-
-// Modified to use the TypedVulnerability interface and not rely on external libraries
-export const generateRandomVulnerabilities = (targetId: string, reportId: string, count: number): TypedVulnerability[] => {
-  const vulnerabilities: TypedVulnerability[] = [];
-  const severityOptions: ('high' | 'medium' | 'low' | 'info')[] = ['high', 'medium', 'low', 'info'];
-  const typeOptions: string[] = ['XSS', 'SQL Injection', 'CSRF', 'Broken Authentication', 'API Security'];
-  const statusOptions: ('open' | 'fixed' | 'ignored')[] = ['open', 'fixed', 'ignored'];
-  
-  for (let i = 0; i < count; i++) {
-    vulnerabilities.push({
-      id: generateUUID(),
-      name: `Sample Vulnerability ${i + 1}`,
-      description: 'This is a sample vulnerability description.',
-      severity: severityOptions[Math.floor(Math.random() * severityOptions.length)],
-      url: `https://example.com/path/${i}`,
-      date: new Date(),
-      status: statusOptions[Math.floor(Math.random() * statusOptions.length)],
-      category: typeOptions[Math.floor(Math.random() * typeOptions.length)],
-      cwe: `CWE-${100 + i}`,
-      remediation: 'Follow security best practices to address this vulnerability.'
-    });
+export const mockSubscriptionPlans: SubscriptionPlan[] = [
+  {
+    id: 'free',
+    name: 'Free',
+    price: 0,
+    billingCycle: 'monthly',
+    features: {
+      maxTargets: 1,
+      maxScansPerMonth: 5,
+      advancedReports: false,
+      apiAccess: false,
+      supportLevel: 'email',
+      scanTypes: ['quick'],
+      scanDepth: ['shallow']
+    }
+  },
+  {
+    id: 'premium',
+    name: 'Premium',
+    price: 49.99,
+    billingCycle: 'monthly',
+    features: {
+      maxTargets: 5,
+      maxScansPerMonth: 20,
+      advancedReports: true,
+      apiAccess: false,
+      supportLevel: 'priority',
+      scanTypes: ['quick', 'full'],
+      scanDepth: ['shallow', 'normal']
+    }
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    price: 199.99,
+    billingCycle: 'monthly',
+    features: {
+      maxTargets: 20,
+      maxScansPerMonth: 100,
+      advancedReports: true,
+      apiAccess: true,
+      supportLevel: '24/7',
+      scanTypes: ['quick', 'full', 'custom'],
+      scanDepth: ['shallow', 'normal', 'deep']
+    }
   }
-  
-  return vulnerabilities;
-};
+];
+
+export const mockReports: Report[] = [
+  {
+    id: 'r1',
+    name: 'Example Website Full Report - May 2023',
+    scanId: 'scan1',
+    targetId: '1',
+    createdAt: new Date('2023-05-10T15:25:00'),
+    format: 'pdf',
+    url: '/reports/example-website-may-2023.pdf'
+  },
+  {
+    id: 'r2',
+    name: 'Example Blog Security Report - May 2023',
+    scanId: 'scan2',
+    targetId: '2',
+    createdAt: new Date('2023-05-05T11:35:00'),
+    format: 'html',
+    url: '/reports/example-blog-may-2023.html'
+  },
+  {
+    id: 'r3',
+    name: 'Example Website Monthly Report - April 2023',
+    scanId: 'scan4',
+    targetId: '1',
+    createdAt: new Date('2023-04-10T10:50:00'),
+    format: 'pdf',
+    url: '/reports/example-website-april-2023.pdf'
+  }
+];

@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2 } from "lucide-react";
+import { Shield, Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function LoginForm() {
@@ -25,90 +25,84 @@ export default function LoginForm() {
       navigate("/");
     } catch (error) {
       console.error("Login error:", error);
-      toast({
-        title: "Login failed",
-        description: "Please check your email and password and try again.",
-        variant: "destructive",
-      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="w-full space-y-6">
-      <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">Welcome to ZeroDay</h1>
-        <p className="text-sm text-muted-foreground">
-          Enter your credentials to access your account
-        </p>
-      </div>
-      <div className="grid gap-6">
-        <form onSubmit={handleSubmit}>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                placeholder="name@example.com"
-                type="email"
-                autoCapitalize="none"
-                autoComplete="email"
-                autoCorrect="off"
-                disabled={isSubmitting}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-slate-50 dark:bg-slate-800"
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-                <Link
-                  to="/forgot-password"
-                  className="text-sm font-medium text-blue-600 underline-offset-4 hover:underline"
-                >
-                  Forgot password?
-                </Link>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background">
+      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+        <div className="flex flex-col space-y-2 text-center">
+          <div className="flex justify-center mb-1">
+            <Shield className="h-10 w-10 text-primary" />
+          </div>
+          <h1 className="text-2xl font-semibold tracking-tight">Welcome to ZeroDay</h1>
+          <p className="text-sm text-muted-foreground">
+            Enter your credentials to access your account
+          </p>
+        </div>
+        <div className="grid gap-6">
+          <form onSubmit={handleSubmit}>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  placeholder="name@example.com"
+                  type="email"
+                  autoCapitalize="none"
+                  autoComplete="email"
+                  autoCorrect="off"
+                  disabled={isSubmitting}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
-              <Input
-                id="password"
-                placeholder="••••••••"
-                type="password"
-                autoComplete="current-password"
-                disabled={isSubmitting}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="bg-slate-50 dark:bg-slate-800"
-              />
+              <div className="grid gap-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  <Link
+                    to="/forgot-password"
+                    className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+                <Input
+                  id="password"
+                  placeholder="••••••••"
+                  type="password"
+                  autoComplete="current-password"
+                  disabled={isSubmitting}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <Button disabled={isSubmitting} type="submit">
+                {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                Sign In
+              </Button>
             </div>
-            <Button 
-              disabled={isSubmitting} 
-              type="submit" 
-              className="mt-2 bg-blue-600 hover:bg-blue-700 text-white"
-            >
-              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Sign In
-            </Button>
+          </form>
+          <div className="mt-4 text-center text-sm">
+            Don't have an account?{" "}
+            <Link to="/signup" className="underline text-primary hover:text-primary/80">
+              Sign up
+            </Link>
           </div>
-        </form>
-        <div className="mt-4 text-center text-sm">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-600 underline-offset-4 hover:underline font-medium">
-            Sign up
-          </Link>
-        </div>
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">Demo Credentials</span>
+            </div>
           </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white dark:bg-background px-2 text-muted-foreground">DEMO CREDENTIALS</span>
+          <div className="text-center text-xs text-muted-foreground">
+            <p><strong>Admin:</strong> admin@zeroday.com / admin123</p>
+            <p><strong>User:</strong> demo@zeroday.com / demo123</p>
           </div>
-        </div>
-        <div className="text-center text-xs text-muted-foreground space-y-1">
-          <p><strong>Admin:</strong> admin@zeroday.com / admin123</p>
-          <p><strong>User:</strong> demo@zeroday.com / demo123</p>
         </div>
       </div>
     </div>

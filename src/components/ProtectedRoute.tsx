@@ -4,13 +4,11 @@ import { useAuth } from "@/context/AuthContext";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  adminOnly?: boolean;
   requiredRole?: "user" | "admin";
 }
 
 export default function ProtectedRoute({ 
   children, 
-  adminOnly = false,
   requiredRole
 }: ProtectedRouteProps) {
   const { isAuthenticated, currentUser, isLoading } = useAuth();
@@ -23,11 +21,6 @@ export default function ProtectedRoute({
     return <Navigate to="/login" replace />;
   }
 
-  // Check if admin-only access is required
-  if (adminOnly && currentUser?.role !== "admin") {
-    return <Navigate to="/unauthorized" replace />;
-  }
-  
   if (requiredRole && currentUser?.role !== requiredRole) {
     return <Navigate to="/unauthorized" replace />;
   }
