@@ -16,7 +16,7 @@ export const CcrLogo = ({ size = "md", className }: CcrLogoProps) => {
   return (
     <div className={cn("flex items-center", className)}>
       <img 
-        src="/lovable-uploads/80445cee-32ec-4e5b-a2cd-f746a3e1cd7c.png"
+        src="/lovable-uploads/d04b325d-bd11-40fc-83cf-27788bf96a6d.png"
         alt="CCR Scanner Logo" 
         className={cn(sizeClasses[size])}
       />
