@@ -1,5 +1,5 @@
 
-import * as React from "react"; 
+import React from "react"; 
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
