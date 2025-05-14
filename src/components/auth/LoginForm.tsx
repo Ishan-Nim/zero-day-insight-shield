@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Shield, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function LoginForm() {
@@ -75,7 +75,7 @@ export default function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <Button disabled={isSubmitting} type="submit" className="mt-2">
+            <Button disabled={isSubmitting} type="submit" className="mt-2 bg-blue-600 hover:bg-blue-700">
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Sign In
             </Button>
@@ -92,14 +92,14 @@ export default function LoginForm() {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">Demo Credentials</span>
+            <span className="bg-background px-2 text-muted-foreground">DEMO CREDENTIALS</span>
           </div>
         </div>
-        <div className="text-center text-xs text-muted-foreground">
+        <div className="text-center text-xs text-muted-foreground space-y-1">
           <p><strong>Admin:</strong> admin@zeroday.com / admin123</p>
           <p><strong>User:</strong> demo@zeroday.com / demo123</p>
         </div>
       </div>
     </div>
   );
-}
+};
