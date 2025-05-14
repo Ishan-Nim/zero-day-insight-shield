@@ -26,7 +26,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const MOCK_USERS = [
   {
     id: '1',
-    email: 'admin@zeroday.com',
+    email: 'admin@cybercrew.com',
     password: 'admin123', // In a real app, this would be hashed
     role: 'admin' as const,
     name: 'Admin User',
@@ -34,7 +34,7 @@ const MOCK_USERS = [
   },
   {
     id: '2',
-    email: 'demo@zeroday.com',
+    email: 'demo@cybercrew.com',
     password: 'demo123', // In a real app, this would be hashed
     role: 'user' as const,
     name: 'Demo User',
@@ -122,7 +122,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       toast({
         title: "Account created",
-        description: `Welcome to ZeroDay, ${name}!`,
+        description: `Welcome to Cyber Crew Scanner, ${name}!`,
       });
     } catch (error: any) {
       toast({

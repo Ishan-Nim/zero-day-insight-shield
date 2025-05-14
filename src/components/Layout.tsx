@@ -87,7 +87,7 @@ export default function Layout({ children }: LayoutProps) {
         >
           <div className="flex items-center justify-between px-6 h-16 bg-sidebar-accent">
             <div className="flex items-center">
-              <Shield className="h-8 w-8 text-primary" />
+              <Shield className="h-8 w-8 text-teal-400" />
               <span className="ml-2 text-xl font-semibold text-sidebar-foreground">Cyber Crew</span>
             </div>
             <Button 
@@ -164,7 +164,7 @@ export default function Layout({ children }: LayoutProps) {
               )}
               {!isAuthenticated && (
                 <div className="flex items-center">
-                  <Shield className="h-6 w-6 text-primary mr-2" />
+                  <Shield className="h-6 w-6 text-teal-400 mr-2" />
                   <span className="font-semibold text-lg">Cyber Crew Scanner</span>
                 </div>
               )}
@@ -227,8 +227,8 @@ export default function Layout({ children }: LayoutProps) {
                           For this demo, please use the login page with these credentials:
                         </p>
                         <div className="bg-muted p-3 rounded-md text-sm">
-                          <p><strong>Admin:</strong> admin@zeroday.com / admin123</p>
-                          <p><strong>User:</strong> demo@zeroday.com / demo123</p>
+                          <p><strong>Admin:</strong> admin@cybercrew.com / admin123</p>
+                          <p><strong>User:</strong> demo@cybercrew.com / demo123</p>
                         </div>
                         <div className="flex justify-center">
                           <Button className="w-full" onClick={() => navigate('/login')}>
